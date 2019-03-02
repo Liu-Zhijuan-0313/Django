@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文章写作页面</title>
+</head>
+<body>
+<h3>文章写作页面</h3>
+<form action="/myblog/{{user.name}}/articlewrite/" method="post">
+    {% csrf_token %}
+    标题：<input type="text" name="title"><br><br>
+    内容：<textarea rows="10" cols="22" name="content"></textarea><br>
+    作者：{{user.name}}<br>
+    <input type="submit" value="发表">
+</form>
+</body>
+</html>

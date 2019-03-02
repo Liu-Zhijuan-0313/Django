@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改文章内容</title>
+</head>
+<body>
+<h3>修改文章内容</h3>
+<form action="/myblog/{{user.name}}/articleupdate/" method="post">
+    {% csrf_token %}
+    {%for i in article %}
+    标题：<input type="text" name="title" value="{{i.title}}"><br><br>
+    内容：<textarea name="content"  cols="30" rows="10">{{i.content}}</textarea><br>
+    作者：{{i.author.name}}
+    <input type="submit" value="确定">
+    {% endfor %}
+</form>
+</body>
+</html>
