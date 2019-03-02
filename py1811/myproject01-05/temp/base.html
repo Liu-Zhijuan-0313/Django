@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+
+<!--此标题其他页面可以继承-->
+<h1>{% block title %} 首页面{% endblock %}</h1>
+
+
+<!--此头部其他页面可以继承-->
+{% block header %}
+头部
+{% endblock %}
+
+
+<!--此内容其他页面可以继承-->
+{% block content %}
+内容
+{% endblock%}
+
+
+<!--此尾部其他页面可以继承-->
+{% block footer %}
+尾部
+{% endblock %}
+
+</body>
+</html>
