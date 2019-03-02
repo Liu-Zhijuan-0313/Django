@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客首页面</title>
+</head>
+<body>
+<h1>博客首页面</h1>
+    {{name}}hello world
+
+
+<!--单行注释-->
+{# <img src="/static/myblog/git.png" alt=""> #}
+<!--多行注释-->
+{% comment %}
+<img src="/static/myblog/git.png" alt="">
+<img src="/static/myblog/git.png" alt="">
+{% endcomment %}
+
+
+
+<!--if判断-->
+{% if True %}你好，世界！{% endif%}
+{% if name == lz %}
+    aaa
+{% else %}
+    bbb
+{% endif %}
+<br>
+
+
+
+<!--变量-->
+{{user.name}}<br>
+<!--for循环结构-->
+{% for i in users%}
+    {{i.name}}{{i.age}}
+{% empty %}
+    users里面如果无循环内容，则执行empty里面的
+{% endfor %}
+</body>
+</html>
+
+<!--
+DTL
+	变量：是来临时存储数据的
+		{{对象.属性}}插值表达式
+	分支循环：
+	注释：
+		{# 单行注释 #}在页面读取的时候直接忽略
+		{% comment %}
+		多行注释		在页面读取的时候直接忽略
+		{% endcomment %}
+
+	过滤器：
+-->
