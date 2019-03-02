@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/myblog/login/" method="post">
+    <!--
+    禁止访问错误，post请求会做防盗链检验，
+    如果报403错误，加上标签{% csrf_token %}
+    -->
+    {% csrf_token %}
+    姓名：<input type="text" name="name"><br>
+    年龄：<input type="number" name="age"><br>
+    <input type="submit" value="登录">
+</form>
+</body>
+</html>
