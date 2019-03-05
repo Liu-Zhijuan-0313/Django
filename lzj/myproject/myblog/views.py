@@ -68,7 +68,7 @@ def userupdate(request, n):
             id = user.id
             user = models.Users(id=id, name=name, age=age, gender=gender, email=email, password=password)
             user.save()
-            return redirect(reverse("myblog:userinfo", args=n))
+            return redirect(reverse("myblog:userinfo", args=(n,)))
         except:
             msg = "此昵称已存在，请重新修改内容"
             user = models.Users.objects.get(name=n)
