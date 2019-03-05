@@ -60,7 +60,7 @@ from django.template import loader
 
 
 def list5(request):
-    temp = loader.get_template('myblog/index.html')
+    temp = loader.get_template('myblog/index1.html')
     return HttpResponse(temp.render({'name': 'lzj'}, request))
 
 
@@ -69,6 +69,6 @@ from django.shortcuts import render
 
 
 def list6(request):
-    # return render(request, 'myblog/index.html')
+    # return render(request, 'myblog/index1.html')
     # 带参数
-    return render(request, 'myblog/index.html', {'name': 'lzj'})
+    return render(request, 'myblog/index1.html', {'name': 'lzj'})
