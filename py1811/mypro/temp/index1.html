@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客首页面</title>
+</head>
+<body>
+<h1>博客首页面</h1>
+    {{name}}hello world
+
+<!--
+url路由的核心操作
+	第一种方案(推荐)：
+		父路径提供namespace设置
+		子路径提供name设置
+		{% url 'namespace的值:name的值' %}
+
+	第二种方案：
+
+		子路径提供app_name和name设置
+		{% url 'namespace的值:name的值' %}
+-->
+<a href="/myblog/register/">登录</a>
+<a href="{% url 'myblog:register'%}">登录</a>
+<img src="/static/git.png" alt="">
+
+<!--
+静态的路由的核心操作
+	当使用static这个标签时，可能会报Invalid block tag on line 16: 'static'.
+	Did you forget to register or load this tag?这个错误，意思是说这个标签不识别
+	问你有没加载或者注册，解决方案就是加载这个标签用{% load static %}。
+-->
+
+{% load static %}
+<img src="{% static 'git.png' %}" alt="">
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/myblog/register/" method="post" enctype="multipart/form-data">
+    <!--
+    禁止访问错误，post请求会做防盗链检验，
+    如果报403错误，加上标签{% csrf_token %}
+    -->
+    {% csrf_token %}
+
+
+    <!--第一种方法form表单-->
+    姓名：<input type="text" name="name"><br>
+    年龄：<input type="number" name="age"><br>
+    上传头像：<input type="file" name="avater"><br>
+    <input type="submit" value="注册">
+
+
+
+    <!--第二种方法form表单-->
+    <!--加上.as_ul之后，input框会换行，前面有黑圆点类型li-->
+    <!--{{userform.as_ul}}-->
+    <!--<input type="submit" value="注册">-->
+</form>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发布文章</title>
+</head>
+<body>
+<form action="{% url 'myblog:addarticle' %}" method="post">
+    {% csrf_token %}
+    标题：<input type="text" name="title"><br><br>
+    内容：<textarea name="content" id="" cols="30" rows="10"></textarea><br>
+    <input type="submit" value="发表">
+</form>
+
+<!--富文本编辑器导入-->
+<script src="/static/tiny_mce/tiny_mce.js"></script>
+<script>
+    tinyMCE.init({
+        "mode":"textareas",
+        //"theme":"advanced",
+        "theme":"simple",
+        "width":500,
+        "height":300
+    })
+</script>
+</body>
+</html>
