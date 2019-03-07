@@ -165,6 +165,7 @@ CACHES = {
             }
         }
 }
+"全文搜索"
 
 # 配置搜索引擎配置
 HAYSTACK_CONNECTIONS = {
@@ -180,3 +181,19 @@ HAYSTACK_SEARCH_RESULTS_PER_PAGE = 2
 
 # 索引配置
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+
+"邮件"
+# qq IMAP/SMTP 配置
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.163.com'
+EMAIL_PORT = 25 # 或者 465/587 是设置了 SSL 加密方式
+# 发送邮件的邮箱
+EMAIL_HOST_USER = '18137128152@163.com'
+# 在邮箱中设置的客户端授权密码
+# 如果重新设置了新的授权码,直接使用最新的授权码即可
+EMAIL_HOST_PASSWORD = 'qikuedu'
+# 这里必须是 True，否则发送不成功
+EMAIL_USE_TLS = True
+# 收件人看到的发件人, 必须是一直且有效的
+EMAIL_FROM = 'Tencent<18137128152@163.com>'

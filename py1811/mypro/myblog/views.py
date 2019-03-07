@@ -338,7 +338,12 @@ def page1(request):
 # ====================0307================================
 
 
-"全文搜索引擎"
-def sou(request):
-    if request.method == "GET":
-        render(request, "myblog/index.html")
+"发邮件"
+from django.core.mail import send_mail
+from django.conf import settings
+
+
+def sendemail(request):
+    # 主题，内容，发件人，收件人
+    send_mail("hello world", "世界你好", settings.EMAIL_FROM, ['Lzj1602176692@163.com'])
+    return HttpResponse("发送成功")
