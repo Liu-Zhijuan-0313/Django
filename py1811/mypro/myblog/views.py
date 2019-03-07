@@ -249,30 +249,30 @@ from django.db import transaction
 
 
 "第一种方法：普通字段CharField上传图片文件"
-def register(request):
-    if request.method == "GET":
-        return render(request, "myblog/register.html")
-    elif request.method == "POST":
-        name = request.POST.get("name")
-        age = request.POST.get("age")
-
-        # 1.获取文件
-        avater = request.FILES["avater"]
-        # 2.拼接上传路径
-        path = "static/img/" + avater.name
-        # 3.以流的方式打开上传
-        with open(path, "wb") as f:
-            # 4.分片写入
-            for file in avater.chunks():
-                f.write(file)
-
-        print(name, age, path)
-        try:
-            user = models.User(name=name, age=age, avater=path)
-            user.save()
-            return HttpResponse("注册成功")
-        except:
-            return HttpResponse("注册失败")
+# def register(request):
+#     if request.method == "GET":
+#         return render(request, "myblog/register.html")
+#     elif request.method == "POST":
+#         name = request.POST.get("name")
+#         age = request.POST.get("age")
+#
+#         # 1.获取文件
+#         avater = request.FILES["avater"]
+#         # 2.拼接上传路径
+#         path = "static/img/" + avater.name
+#         # 3.以流的方式打开上传
+#         with open(path, "wb") as f:
+#             # 4.分片写入
+#             for file in avater.chunks():
+#                 f.write(file)
+#
+#         print(name, age, path)
+#         try:
+#             user = models.User(name=name, age=age, avater=path)
+#             user.save()
+#             return HttpResponse("注册成功")
+#         except:
+#             return HttpResponse("注册失败")
 
 
 "第二种方法：ImageField上传图片文件"
