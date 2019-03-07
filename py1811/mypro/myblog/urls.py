@@ -41,4 +41,11 @@ urlpatterns = [
 
     url(r'^jsontest/$', views.jsontest),
     url(r'^huihua/$', views.huihua),
+    # 缓存
+    url(r'^redis1/$', views.redis1),
+    # 分页
+    url(r'^page1/$', views.page1),
+
+    # 全文搜索
+    url(r'^sou/$', views.sou),
 ]

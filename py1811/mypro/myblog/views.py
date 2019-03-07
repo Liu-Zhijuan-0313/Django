@@ -249,50 +249,50 @@ from django.db import transaction
 
 
 "第一种方法：普通字段CharField上传图片文件"
-# def register(request):
-#     if request.method == "GET":
-#         return render(request, "myblog/register.html")
-#     elif request.method == "POST":
-#         name = request.POST.get("name")
-#         age = request.POST.get("age")
-#
-#         # 1.获取文件
-#         avater = request.FILES["avater"]
-#         # 2.拼接上传路径
-#         path = "static/img/" + avater.name
-#         # 3.以流的方式打开上传
-#         with open(path, "wb") as f:
-#             # 4.分片写入
-#             for file in avater.chunks():
-#                 f.write(file)
-#
-#         print(name, age, path)
-#         try:
-#             user = models.User(name=name, age=age, avater=path)
-#             user.save()
-#             return HttpResponse("注册成功")
-#         except:
-#             return HttpResponse("注册失败")
+def register(request):
+    if request.method == "GET":
+        return render(request, "myblog/register.html")
+    elif request.method == "POST":
+        name = request.POST.get("name")
+        age = request.POST.get("age")
+
+        # 1.获取文件
+        avater = request.FILES["avater"]
+        # 2.拼接上传路径
+        path = "static/img/" + avater.name
+        # 3.以流的方式打开上传
+        with open(path, "wb") as f:
+            # 4.分片写入
+            for file in avater.chunks():
+                f.write(file)
+
+        print(name, age, path)
+        try:
+            user = models.User(name=name, age=age, avater=path)
+            user.save()
+            return HttpResponse("注册成功")
+        except:
+            return HttpResponse("注册失败")
 
 
 "第二种方法：ImageField上传图片文件"
-# def register(request):
-#     if request.method == "GET":
-#         return render(request, "myblog/register.html")
-#     elif request.method == "POST":
-#         name = request.POST.get("name")
-#         age = request.POST.get("age")
-#
-#         # 1.获取文件
-#         avater = request.FILES["avater"]
-#         print(name, age, avater)
-#         try:
-#             # 2.直接保存图片数据
-#             user = models.User(name=name, age=age, avater1=avater)
-#             user.save()
-#             return HttpResponse("注册成功")
-#         except:
-#             return HttpResponse("注册失败")
+def register(request):
+    if request.method == "GET":
+        return render(request, "myblog/register.html")
+    elif request.method == "POST":
+        name = request.POST.get("name")
+        age = request.POST.get("age")
+
+        # 1.获取文件
+        avater = request.FILES["avater"]
+        print(name, age, avater)
+        try:
+            # 2.直接保存图片数据
+            user = models.User(name=name, age=age, avater1=avater)
+            user.save()
+            return HttpResponse("注册成功")
+        except:
+            return HttpResponse("注册失败")
 
 
 "会话跟踪"
@@ -300,3 +300,45 @@ def huihua(req):
     # 登录之后，登录的验证码可以会话跟踪
     print(req.session.get("code"))
     return HttpResponse("保存数据到数据库")
+
+# =================0306===============================
+
+
+"缓存取数据，没有从数据库取数据，并且存入缓存中"
+from django.core.cache import cache
+
+
+def redis1(request):
+    print("从缓存中拿数据")
+    us = cache.get("users")
+    if us is None:
+        print("从数据库取数据")
+        users = models.User.um.all()
+        print("存入缓存中")
+        cache.set("users", users)
+        print(cache.get("users"))
+    return HttpResponse("从缓存取数据，没有从数据库取数据，并且存入缓存中")
+
+
+"分页"
+from django.core.paginator import Paginator, Page
+
+
+def page1(request):
+    # 查找所有用户
+    user = models.User.um.all()
+    #
+    pagena = Paginator(user, 5)
+    # 第一种方法加形参，第二种方法用GET
+    pagenum = request.GET.get('pagenum')
+    # 获取到指定页面的数据
+    page = pagena.page(pagenum)
+    return render(request, "myblog/page1.html", {"page": page})
+
+# ====================0307================================
+
+
+"全文搜索引擎"
+def sou(request):
+    if request.method == "GET":
+        render(request, "myblog/index.html")

@@ -43,6 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myblog',
     'tinymce',
+
+    # 全文搜索
+    'haystack',
+    'mysearch',
 ]
 # 中间件
 MIDDLEWARE = [
@@ -146,3 +150,33 @@ TINYMCE_DEFAULT_CONFIG = {
 	 'width': 600,
 	 'height': 400,
 }
+
+# redis缓存配置
+CACHES = {
+
+    "default":
+        {
+            "BACKEND": "django_redis.cache.RedisCache",
+            # 选中的数据库
+            "LOCATION": "redis://127.0.0.1:6379/1",
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient",
+                # "PASSWORD":密码
+            }
+        }
+}
+
+# 配置搜索引擎配置
+HAYSTACK_CONNECTIONS = {
+ 'default': {
+    'ENGINE': 'mysearch.whoosh_cn_backend.WhooshEngine',
+    # 将来需要修改
+    'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+ }
+}
+
+# 设置分页，每页显示的条数
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 2
+
+# 索引配置
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'

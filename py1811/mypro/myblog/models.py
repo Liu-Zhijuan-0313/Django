@@ -31,6 +31,11 @@ class User(models.Model):
     # 通过属性的方式指向类的管理器
     um = UsersManger()
 
+    # 查询所有文章的时候，
+    # User object 对象转换为姓名,方便查看
+    def __str__(self):
+        return self.name
+
 
 class Article(models.Model):
     id = models.AutoField(primary_key=True)
@@ -38,6 +43,10 @@ class Article(models.Model):
     content = models.TextField(verbose_name="内容")
     author = models.ForeignKey(User, verbose_name="作者")
 
+    # 查询所有用户的时候，
+    # Article object 对象转换为标题,方便查看
+    def __str__(self):
+        return self.title
 
 """
 连接数据库：
@@ -69,12 +78,13 @@ class Article(models.Model):
 from tinymce.models import HTMLField
 
 
-
-
-
-
 class Article2(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255, verbose_name="标题")
     content = HTMLField()
     author = models.ForeignKey(User, verbose_name="作者")
+
+    # 查询所有文章的时候，
+    # Article2 object 对象转换为标题,方便查看
+    def __str__(self):
+        return self.title

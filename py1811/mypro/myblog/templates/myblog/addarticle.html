@@ -5,6 +5,17 @@
     <title>发布文章</title>
 </head>
 <body>
+<!--全文搜索-->
+<form method='get' action="/search/" target="_blank">
+    <input type="text" name="q">
+    <input type="submit" value="查询">
+</form>
+<hr>
+<br>
+
+
+
+
 <form action="{% url 'myblog:addarticle' %}" method="post">
     {% csrf_token %}
     标题：<input type="text" name="title"><br><br>

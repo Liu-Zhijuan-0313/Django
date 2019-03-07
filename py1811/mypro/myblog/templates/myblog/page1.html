@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分页</title>
+</head>
+<body>
+<h3>分页</h3>
+<!--遍历所有数据-->
+{% for i in page.object_list %}
+{{i.name}}=====>{{i.age}}<br>
+{% empty %}
+无数据
+{% endfor %}
+
+
+{% if page.has_other_pages %}
+当前页码：{{page.number}}
+{% endif %}<br>
+
+<!--实现点击页码，可以切换到指定页码的数据-->
+{% for num in page.paginator.page_range %}
+    <a href="/myblog/page1/?pagenum= {{num}}">页码编号：{{num}}</a>
+        {# 页码编号：{{num}} #}
+{% endfor %}
+
+
+</body>
+</html>

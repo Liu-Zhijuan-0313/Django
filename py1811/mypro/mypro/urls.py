@@ -30,4 +30,7 @@ urlpatterns = [
     url(r'^base/$', views.base),
     # 继承主页面的子页面路由
     url(r'^base_index1/$', views.base_index1),
+
+    # 配置检索的路由
+    url(r'^search/', include("haystack.urls")),
 ]
