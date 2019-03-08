@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myblog',
+    # 富文本编辑器
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -120,5 +122,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
+
 STATIC_URL = '/static/'
 
+
+# 全局共用的静态资源的设置
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
+
+# 后台设置富文本编辑器
+TINYMCE_JS_URL = "/static/tiny_mce/tiny_mce.js"
+TINYMCE_JS_ROOT = "/static/tiny_mce/"
+TINYMCE_DEFAULT_CONFIG = {
+    'theme': "advanced",
+    'width': 600,
+    'height': 400,
+}

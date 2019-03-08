@@ -20,6 +20,6 @@ from . import views
 from django.conf.urls import include
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^index/$', views.index),
+    url(r'^$', views.base),
     url(r'^myblog/', include('myblog.urls')),
 ]

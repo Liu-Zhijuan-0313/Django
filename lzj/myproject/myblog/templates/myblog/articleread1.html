@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}查看文章{% endblock %}
+{% block index %}
+<li class="list-group-item active"><a href="/" style="color: white">博客首页面</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:userinfo' %}">用户信息</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:userupdate' %}">修改用户信息</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:articlewrite' %}">写文章</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:articlelist' %}">查看文章列表</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:logout' %}">退出登录</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-9">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            查看文章详情
+        </div>
+        {% for i in article %}
+        <div class="row">
+            <h3 class=" col-md-offset-4">{{i.title}}</h3>
+
+            <div class="col-sm-12 col-md-offset-2">
+                <textarea rows="10" cols="30" name="content">{{i.content}}</textarea>
+            </div>
+        </div>
+        <p class="col-md-12 col-md-offset-1"> </p>
+        <div class="form-group">
+            <label class="col-md-0 col-md-offset-4 control-label">
+                <button class="btn btn-info" >
+                    <a href="{% url 'myblog:articlelist' %}" style="color:white">返回文章列表</a>
+                </button>
+
+            </label><br>
+        </div>
+        <div class="form-group">
+            <label class="col-md-0 col-md-offset-10 control-label">作者：{{i.author.name}}</label><br>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div>
+    </div>
+</div>
+</div>
+
+
+<script src="/static/tiny_mce/tiny_mce.js"></script>
+<script>
+    tinyMCE.init({
+           "mode":"textareas",
+           "theme":"simple",
+           "width":500,
+           "height":300
+   }) 
+
+
+</script>
+
+{% endblock %}

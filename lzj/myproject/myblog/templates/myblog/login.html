@@ -1,17 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h3>登陆</h3>
-<form action="/myblog/login/" method="post">
-    {{msg}}<br>
-    {% csrf_token %}
-    昵称：<input type="text" name="name"><br>
-    密码：<input type="text" name="password"><br>
-    <input type="submit" value="登录">
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}登陆{% endblock %}
+{% block content %}
+<div class="col-md-9">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            登陆
+        </div>
+        <br>
+        <div>
+            <form class="form-horizontal" action="/myblog/login/" method="post">
+                {% csrf_token %}
+                 <!--验证码或者昵称错误提示-->
+                 <div class="form-group">
+                    <label for="inputEmail3" class=" col-sm-5 control-label" style="color:red;"> {{msg}}</label>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">昵称</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="inputEmail3" placeholder="请输入你的昵称" name="name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-5">
+                        <input type="password" class="form-control" id="inputPassword3" placeholder="请输入你的密码"
+                               name="password">
+                    </div>
+                </div>
+                <!--验证码-->
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">验证码</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="code" placeholder="请输入你的验证码"
+                               name="code">
+                        <img src="{% url 'myblog:create_code_img' %}" alt=""  onclick="refresh_check_code(this)"><br>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="remember" value="remember"> Remember me
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">登录</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--点击验证码变化-->
+<script>
+   function refresh_check_code(node){
+        node.src = "/myblog/create_code_img/?search = " + Math.random();
+    }
+</script>
+{% endblock %}

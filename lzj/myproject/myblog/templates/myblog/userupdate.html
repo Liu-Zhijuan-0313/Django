@@ -1,20 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>修改用户信息</title>
-</head>
-<body>
-<h3>修改用户信息</h3>
-<form action="/myblog/{{user.name}}/userupdate/" method="post">
-    {% csrf_token %}
-    {{msg}}<br>
-    姓名：<input type="text" name="name" value="{{user.name}}"><br>
-    年龄：<input type="number" name="age" value="{{user.age}}"><br>
-    性别：<input type="text" name="gender" value="{{user.gender}}"><br>
-    邮箱：<input type="email" name="email" value="{{user.email}}"><br>
-    密码：<input type="text" name="password" value="{{user.password}}"><br>
-    <input type="submit" value="确定">
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}修改用户信息{% endblock %}
+{% block index %}
+<li class="list-group-item active"><a href="/" style="color: white">博客首页面</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:userinfo' %}">用户信息</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:userupdate' %}">修改用户信息</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:articlewrite' %}">写文章</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:articlelist' %}">查看文章列表</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:logout' %}">退出登录</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-9">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            修改用户信息
+        </div>
+        <br>
+        <div>
+            <form class="form-horizontal" action="{% url 'myblog:userupdate' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                 <!--昵称不能重复错误提示-->
+                 <div class="form-group">
+                    <label for="inputEmail3" class=" col-sm-5 control-label" style="color:red;"> {{msg}}</label>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputavater" class="col-sm-2 control-label">头像</label>
+                    <div class="col-sm-5">
+                         <img src="/{{user.avater1}}" alt="" width="100" height="100" class="img-circle">
+                        <input type="file" name="avater1" class="form-control"   id="inputavater" >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">昵称</label>
+                    <div class="col-sm-5">
+
+                         <input type="text" class="form-control" id="inputEmail3"
+                                placeholder="请输入你的昵称" name="name" value="{{user.name}}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputage" class="col-sm-2 control-label">年龄</label>
+                    <div class="col-sm-5">
+                        <input type="number" class="form-control" id="inputage" placeholder="请输入你的年龄"
+                               name="age" value="{{user.age}}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputgender" class="col-sm-2 control-label">性别</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="inputgender" placeholder="请输入你的性别"
+                               name="gender" value="{{user.gender}}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputemail" class="col-sm-2 control-label"> 邮箱</label>
+                    <div class="col-sm-5">
+                        <input type="email" class="form-control" id="inputemail" placeholder="请输入你的邮件"
+                               name="email" value="{{user.email}}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputpassword" class="col-sm-2 control-label"> 密码</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="inputpassword" placeholder="请输入你的密码"
+                               name="password" value="{{user.password}}">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <input type="submit" class="btn btn-info" value="确定修改">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
