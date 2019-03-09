@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}查看文章列表{% endblock %}
+{% block index %}
+<li class="list-group-item active"><a href="/" style="color: white">博客首页面</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:userinfo' %}">用户信息</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:userupdate' %}">修改用户信息</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:articlewrite' %}">写文章</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:articlelist' %}">查看文章列表</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:logout' %}">退出登录</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-9">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            搜索结果
+        </div>
+        <div>
+            {% if query %}
+
+            <h4>搜索结果如下：</h4>
+            {% for result in page.object_list %}
+
+            <a href="/myblog/{{result.object.title}}/articleread1/" style="text-decoration:none;">
+                <div style="color:red;text-align:center;font-size:25px;">{{ result.object.title }}</div>
+            </a><br/>
+            {% empty %}
+            <p>啥也没找到</p>
+            {% endfor %}
+
+            {% if page.has_previous or page.has_next %}
+            <div>
+                {% if page.has_previous %}
+                <a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">
+                    {% endif %}
+                    &laquo; 上一页
+                    {% if page.has_previous %}
+                </a>
+                {% endif %}
+                |
+                {% if page.has_next %}
+                <a href="?q={{ query }}&amp;page={{ page.next_page_number }}">
+                    {% endif %}
+                    下一页 &raquo;
+                    {% if page.has_next %}
+                </a>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block index %}
+<li class="list-group-item active"><a href="/" style="color: white">博客首页面</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:userinfo' %}">用户信息</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:userupdate' %}">修改用户信息</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:articlewrite' %}">写文章</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:articlelist' %}">查看文章列表</a></li>
+<li class="list-group-item"><a href="{% url 'myblog:logout' %}">退出登录</a></li>
+{% endblock %}
