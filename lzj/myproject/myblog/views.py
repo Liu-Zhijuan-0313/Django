@@ -163,19 +163,23 @@ def articleread1(request, a):
 
 def articleupdate(request, a):
     article = models.Article.objects.get(title=a)
-    if request.method == "GET":
-        article = models.Article.objects.get(title=a)
-        return render(request, "myblog/articleupdate.html", {"article": article})
-    elif request.method == "POST":
-        title = request.POST.get("title")
-        content = request.POST.get("content")
-        author = request.POST.get("author")
-        # print(title, content)
+    if request.session["loginUser"] == article.author.name:
+        if request.method == "GET":
+            article = models.Article.objects.get(title=a)
+            return render(request, "myblog/articleupdate.html", {"article": article})
+        elif request.method == "POST":
+            title = request.POST.get("title")
+            content = request.POST.get("content")
+            author = request.POST.get("author")
+            # print(title, content)
 
-        user = models.Users.objects.get(name=author)
-        article = models.Article(id=article.id, title=title, content=content, author_id=user.id)
-        article.save()
-        return redirect(reverse("myblog:articleread1", args=(article.title,)))
+            user = models.Users.objects.get(name=author)
+            article = models.Article(id=article.id, title=title, content=content, author_id=user.id)
+            article.save()
+            return redirect(reverse("myblog:articleread1", args=(article.title,)))
+    else:
+        msg = "不是作者本人，无法修改此文章"
+        return render(request, "myblog/articledelete.html", {"msg": msg})
 
 
 # 删除文章
