@@ -181,9 +181,13 @@ def articleupdate(request, a):
 # 删除文章
 def articledelete(request, a):
     article = models.Article.objects.get(title=a)
-    article.delete()
-    return redirect(reverse("myblog:articlelist"))
+    if request.session["loginUser"] == article.author.name:
 
+        article.delete()
+        return redirect(reverse("myblog:articlelist"))
+    else:
+        msg = "不是作者本人，无法删除此文章"
+        return render(request, "myblog/articledelete.html", {"msg": msg})
 
 
 # 退出登录
@@ -193,7 +197,3 @@ def logout(request):
         return redirect(reverse("myblog:login"))
     except Exception as f:
         return redirect(reverse("myblog:login"))
-
-
-
-
