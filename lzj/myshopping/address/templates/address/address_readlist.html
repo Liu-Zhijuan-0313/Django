@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>地址列表</title>
+</head>
+<body>
+<h3>查看地址列表</h3>
+{% for i in addressall %}
+所属用户:{{i.users.username}}<br>
+收货人姓名:{{i.recv_name}}<br>
+收货人联系方式:{{i.recv_phone}}<br>
+国家:{{i.native}}<br>
+省区:{{i.provice}}<br>
+市区:{{i.city}}<br>
+县区:{{i.country}}<br>
+街道:{{i.street}}<br>
+详细描述:{{i.desc}}<br>
+是否默认地址:{{i.status}}<br>
+<a href="/address/{{i.id}}/address_read/">查看详情</a>
+<a href="/address/{{i.id}}/address_delete/">删除地址</a>
+<a href="/address/{{i.id}}/address_update/">修改地址</a>
+<a href="{% url 'address:address_add' %}">添加地址</a>
+<hr>
+{% endfor %}
+</body>
+</html>

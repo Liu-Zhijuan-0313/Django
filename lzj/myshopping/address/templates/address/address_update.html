@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改地址</title>
+</head>
+<body>
+<h3>修改地址</h3>
+<form action="/address/{{address.id}}/address_update/" method="post">
+    {% csrf_token %}
+    收货人姓名: <input type="text" name="recv_name" value="{{address.recv_name}}"><br>
+    收货人联系方式: <input type="text" name="recv_phone" value="{{address.recv_phone}}"><br>
+    国家: <input type="text" name="native" value="{{address.native}}"><br>
+    省区: <input type="text" name="provice" value="{{address.provice}}"><br>
+    市区: <input type="text" name="city" value="{{address.city}}"><br>
+    县区: <input type="text" name="country" value="{{address.country}}"><br>
+    街道: <input type="text" name="street" value="{{address.street}}"><br>
+    详细描述: <input type="text" name="desc" value="{{address.desc}}"><br>
+    是否默认地址: <input type="text" name="status" value="{{address.status}}">
+    <input type="submit" value="确定修改">
+</form>
+
+<a href="/address/{{address.id}}/address_read/">查看详情</a>
+<a href="{% url 'address:address_readlist' %}">返回地址列表</a>
+</body>
+</html>

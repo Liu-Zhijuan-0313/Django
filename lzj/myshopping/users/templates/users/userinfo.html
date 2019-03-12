@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查看用户信息</title>
+</head>
+<body>
+    <h3>查看用户信息</h3>
+    用户编号    {{user.id}}<br>
+    登录账号    {{user.username}}<br>
+    登录密码    {{user.userpass}}<br>
+    用户昵称    {{user.nickname}}<br>
+    用户年龄    {{user.age}}<br>
+    用户性别    {{user.gender}}<br>
+    用户头像 <img src="/{{user.header}}" alt=""><br>
+    联系方式    {{user.phone}}<br>
+    电子邮箱    {{user.email}}<br>
+    注册时间    {{user.regist_time}}<br>
+    上次登录时间   {{user.last_login_time}}
+</body>
+</html>

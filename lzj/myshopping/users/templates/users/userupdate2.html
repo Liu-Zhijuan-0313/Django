@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% block contentleft %}
+<div class="yui3-u-1-6 list">
+    <dl>
+        <dt><i>·</i> 设置</dt>
+        <dd>个人信息</dd>
+        <dd class="active">修改用户信息</dd>
+        <dd>账号绑定</dd>
+        <dd>我的级别</dd>
+        <dd>收货地址</dd>
+        <dd>应用授权</dd>
+        <dd>快捷支付</dd>
+        <dd>企业发票</dd>
+        <dd>采购需求单</dd>
+    </dl>
+</div>
+{% endblock %}
+
+{% block contentright %}
+<!--右侧主内容-->
+<div class="yui3-u-5-6 body">
+    <div class="addressList">
+        <div class="mt">
+            <span class="fl"><strong>修改用户信息</strong></span>
+        </div>
+    </div>
+
+
+    <div class="address-detail">
+        <div class="addresses">
+            <div class="address-item" style="width:900px;height:400px;">
+                <div class="smt">
+                    <a href="{% url 'users:userinfo' %}" class="pull-right delete">查看用户信息</a>
+                </div>
+                <form action="{% url 'users:userupdate' %}" method="post">
+                    {% csrf_token %}
+                    <div style="float:left;width:200px;">
+                        <div class="smc" style="float:left">
+                            <div class="item">
+                                <span class="fl label"></span>
+                                <div class="detail">
+                                    <img src="/{{user.header}}" alt=""
+                                         style="width: 100px;height: 100px;border-radius: 50%;margin: 0 auto;">
+                                    <input type="file" name="header">
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div style="float:left;width:700px;">
+                        <div class="smc">
+                            <div class="item">
+                                <span class="fl label">登录账号：</span>
+                                <div class="detail">
+                                    <input type="text" name="username" value="{{user.username}}"
+                                           placeholder="请输入你的登录账号">
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </div>
+
+                        <div class="smc">
+                            <div class="item">
+                                <span class="fl label">登录密码：</span>
+                                <div class="detail"><input type="text" name="userpass" value="{{user.userpass}}"
+                                                           placeholder="设置登录密码"></div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </div>
+                        <div class="smc">
+                            <div class="item">
+                                <span class="fl label">用户昵称：</span>
+                                <div class="detail"><input type="text" name="nickname" value="{{user.nickname}}"
+                                                           placeholder="请输入你的用户昵称"></div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </div>
+                        <div class="smc">
+                            <div class="item">
+                                <span class="fl label">用户年龄：</span>
+                                <div class="detail"><input type="text" name="age" value="{{user.age}}"
+                                                           placeholder="请输入你的用户年龄"></div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </div>
+                        <div class="smc">
+                            <div class="item">
+                                <span class="fl label">用户性别：</span>
+                                <div class="detail"><input type="text" name="gender" value="{{user.gender}}"
+                                                           placeholder="请输入你的用户性别 "></div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+
+
+                        <div class="smc">
+                            <div class="item">
+                                <span class="fl label">联系方式：</span>
+                                <div class="detail"><input type="text" name="phone" value="{{user.phone}}"
+                                                           placeholder="请输入你的手机号"></div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+
+                        <div class="smc">
+                            <div class="item">
+                                <span class="fl label">电子邮箱：</span>
+                                <div class="detail"><input type="email" name="email" value="{{user.email}}"
+                                                           placeholder="请输入你的邮箱"></div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="control-group">
+                            <label class="control-label"></label>
+                            <div class="clearfix"></div>
+                            <div class="controls btn-reg">
+                                <input type="submit" class="sui-btn btn-block btn-xlarge btn-danger reg-btn"
+                                       value="确定修改" style="width:195px;">
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

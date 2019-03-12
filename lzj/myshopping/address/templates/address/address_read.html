@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>地址详情</title>
+</head>
+<body>
+<h3>地址详情</h3>
+所属用户:{{address.users.username}}<br>
+收货人姓名:{{address.recv_name}}<br>
+收货人联系方式:{{address.recv_phone}}<br>
+国家:{{address.native}}<br>
+省区:{{address.provice}}<br>
+市区:{{address.city}}<br>
+县区:{{address.country}}<br>
+街道:{{address.street}}<br>
+详细描述:{{address.desc}}<br>
+是否默认地址:{{address.status}}<br>
+<a href="{% url 'address:address_readlist' %}">返回地址列表</a>
+
+</body>
+</html>

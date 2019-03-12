@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+</head>
+<body>
+<h3>注册页面</h3>
+<form action="{% url 'users:register' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{msg}}
+    登录账号:<input type="text" name="username" placeholder="请输入你的登录账号"><br>
+    联系方式: <input type="text" name="phone" placeholder="请输入你的手机号"><br>
+    电子邮箱: <input type="email" name="email" placeholder="请输入你的邮箱"><br>
+    登录密码: <input type="password" name="userpass" placeholder="设置登录密码"><br>
+    确认密码：<input type="password" name="userpass1" placeholder="再次确认密码"><br>
+    验证码：<input type="text" name="code" id="code" placeholder="请输入验证码">
+    <img src="{% url 'users:create_code_img' %}" alt="" onclick="refresh_check_code(this)"><br>
+    <input type="submit" value="完成注册">
+</form>
+<script>
+    function refresh_check_code(node){
+        node.src = "/users/create_code_img/?search = " + Math.random();
+    }
+</script>
+</body>
+</html>

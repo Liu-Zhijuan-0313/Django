@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>添加地址</h3>
+<form action="{% url 'address:address_add' %}" method="post">
+    {% csrf_token %}
+    收货人姓名: <input type="text" name="recv_name"><br>
+    收货人联系方式: <input type="text" name="recv_phone"><br>
+    国家: <input type="text" name="native" ><br>
+    省区: <input type="text" name="provice"><br>
+    市区: <input type="text" name="city"><br>
+    县区: <input type="text" name="country"><br>
+    街道: <input type="text" name="street"><br>
+    详细描述: <input type="text" name="desc"><br>
+    是否默认地址: <input type="text" name="status">
+    <input type="submit" value="确定添加">
+</form>
+<a href="{% url 'address:address_readlist' %}">参看地址列表</a>
+</body>
+</html>
