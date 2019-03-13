@@ -24,13 +24,43 @@
                 <div class="shortcut">
                     <ul class="fl">
                         <li class="f-item">品优购欢迎您！</li>
+
+                        {% if request.session.loginuser %}
+                        <li class="f-item"><a href="{% url 'users:userinfo' %}" target="_blank"
+                                              style="color:red; text-decoration:none;">{{request.session.loginuser }}</a></li>
+
+
+                        {% else %}
                         <li class="f-item">请<a href="{% url 'users:login' %}" target="_blank">登录</a>　
                             <span><a href="{% url 'users:register' %}" target="_blank">免费注册</a></span>
                         </li>
+                        {% endif %}
+
                     </ul>
                     <ul class="fr">
-                        <li class="f-item"><a href="{% url 'users:userinfo' %}" target="_blank">我的信息</a></li>
+
+
+                        <li class="f-item"><a href="{% url 'users:userinfo' %}" target="_blank"
+                                              style="color:#333333; text-decoration:none;">我的信息</a>
+                        </li>
                         <li class="f-item space"></li>
+                        <li class="f-item"><a href="{% url 'address:address_readlist' %}" target="_blank"
+                                              style="color:#333333; text-decoration:none;">我的地址</a>
+                        </li>
+                        <li class="f-item space"></li>
+                        <li class="f-item"><a href="{% url 'store:store_add' %}" target="_blank"
+                                              style="color:#333333; text-decoration:none;">我要开店</a>
+                        </li>
+                        <li class="f-item space"></li>
+
+                         {% if request.session.loginuser %}
+                        <li class="f-item"><a href="{% url 'users:logout' %}" target="_blank"
+                                              style="color:#333333; text-decoration:none;">退出登录</a>
+                        </li>
+                        <li class="f-item space"></li>
+                        {% endif %}
+
+
                         <li class="f-item">我的订单</li>
                         <li class="f-item space"></li>
                         <li class="f-item"><a href="home.html" target="_blank">我的品优购</a></li>
@@ -667,53 +697,65 @@
                     </li>
                 </ul>
             </div>
-            <ul class="yui3-g Lifeservice" >
+            <ul class="yui3-g Lifeservice">
                 <li class="yui3-u-1-4 life-item tab-item">
-                    <i class="list-item list-item-1" style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;" ></i>
+                    <i class="list-item list-item-1"
+                       style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
                     <span class="service-intro">话费</span>
                 </li>
                 <li class="yui3-u-1-4 life-item tab-item">
-                    <i class="list-item list-item-2" style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
+                    <i class="list-item list-item-2"
+                       style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
                     <span class="service-intro">机票</span>
                 </li>
                 <li class="yui3-u-1-4 life-item tab-item">
-                    <i class="list-item list-item-3" style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
+                    <i class="list-item list-item-3"
+                       style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
                     <span class="service-intro">电影票</span>
                 </li>
                 <li class="yui3-u-1-4 life-item tab-item">
-                    <i class="list-item list-item-4" style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
+                    <i class="list-item list-item-4"
+                       style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
                     <span class="service-intro">游戏</span>
                 </li>
                 <li class="yui3-u-1-4 life-item notab-item">
-                    <i class="list-item list-item-5" style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
+                    <i class="list-item list-item-5"
+                       style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
                     <span class="service-intro">彩票</span>
                 </li>
                 <li class="yui3-u-1-4 life-item notab-item">
-                    <i class="list-item list-item-6" style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
+                    <i class="list-item list-item-6"
+                       style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
                     <span class="service-intro">加油站</span>
                 </li>
                 <li class="yui3-u-1-4 life-item notab-item">
-                    <i class="list-item list-item-7" style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
+                    <i class="list-item list-item-7"
+                       style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
                     <span class="service-intro">酒店</span>
                 </li>
                 <li class="yui3-u-1-4 life-item notab-item">
-                    <i class="list-item list-item-8" style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
+                    <i class="list-item list-item-8"
+                       style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
                     <span class="service-intro">火车票</span>
                 </li>
                 <li class="yui3-u-1-4 life-item  notab-item">
-                    <i class="list-item list-item-9" style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
+                    <i class="list-item list-item-9"
+                       style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
                     <span class="service-intro">众筹</span>
                 </li>
                 <li class="yui3-u-1-4 life-item notab-item">
-                    <i class="list-item list-item-10" style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
+                    <i class="list-item list-item-10"
+                       style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
                     <span class="service-intro">理财</span>
                 </li>
                 <li class="yui3-u-1-4 life-item notab-item">
-                    <i class="list-item list-item-11" style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
+                    <i class="list-item list-item-11"
+                       style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
                     <span class="service-intro">礼品卡</span>
                 </li>
                 <li class="yui3-u-1-4 life-item notab-item">
-                    <i class="list-item list-item-12" style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
+                    <i class="list-item list-item-12"
+                       style="background-image: url(/static/images/icons.png);width: 61px;height: 40px;display: block;position: relative;"></i>
                     <span class="service-intro">白条</span>
                 </li>
             </ul>
@@ -1356,7 +1398,7 @@
     </div>
 </div>
 <!-- 楼层位置 -->
-<div id="floor-index" class="floor-index" >
+<div id="floor-index" class="floor-index">
     <ul>
         <li>
             <a class="num" href="javascript:;" style="display: none;">1F</a>
@@ -1387,10 +1429,11 @@
     <div class="py-container">
         <div class="footlink">
             <div class="Mod-service">
-                <ul class="Mod-Service-list" >
+                <ul class="Mod-Service-list">
                     <li class="grid-service-item intro  intro1">
 
-                        <i class="serivce-item fl" style="background-image: url(/static/images/icons.png);width: 49px;height: 50px;"> </i>
+                        <i class="serivce-item fl"
+                           style="background-image: url(/static/images/icons.png);width: 49px;height: 50px;"> </i>
                         <div class="service-text">
                             <h4>正品保障</h4>
                             <p>正品保障，提供发票</p>
@@ -1399,7 +1442,8 @@
                     </li>
                     <li class="grid-service-item  intro intro2">
 
-                        <i class="serivce-item fl" style="background-image: url(/static/images/icons.png);width: 49px;height: 50px;"></i>
+                        <i class="serivce-item fl"
+                           style="background-image: url(/static/images/icons.png);width: 49px;height: 50px;"></i>
                         <div class="service-text">
                             <h4>正品保障</h4>
                             <p>正品保障，提供发票</p>
@@ -1408,7 +1452,8 @@
                     </li>
                     <li class="grid-service-item intro  intro3">
 
-                        <i class="serivce-item fl" style="background-image: url(/static/images/icons.png);width: 49px;height: 50px;"></i>
+                        <i class="serivce-item fl"
+                           style="background-image: url(/static/images/icons.png);width: 49px;height: 50px;"></i>
                         <div class="service-text">
                             <h4>正品保障</h4>
                             <p>正品保障，提供发票</p>
@@ -1417,7 +1462,8 @@
                     </li>
                     <li class="grid-service-item  intro intro4">
 
-                        <i class="serivce-item fl" style="background-image: url(/static/images/icons.png);width: 49px;height: 50px;"></i>
+                        <i class="serivce-item fl"
+                           style="background-image: url(/static/images/icons.png);width: 49px;height: 50px;"></i>
                         <div class="service-text">
                             <h4>正品保障</h4>
                             <p>正品保障，提供发票</p>
@@ -1426,7 +1472,8 @@
                     </li>
                     <li class="grid-service-item intro intro5">
 
-                        <i class="serivce-item fl" style="background-image: url(/static/images/icons.png);width: 49px;height: 50px;"></i>
+                        <i class="serivce-item fl"
+                           style="background-image: url(/static/images/icons.png);width: 49px;height: 50px;"></i>
                         <div class="service-text">
                             <h4>正品保障</h4>
                             <p>正品保障，提供发票</p>

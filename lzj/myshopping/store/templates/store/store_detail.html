@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>店铺详情</title>
+</head>
+<body>
+<h3>店铺详情</h3>
+    店铺名称：{{i.name}}<br>
+    店铺封面：<img src="/{{store.cover}}" alt="" width="100"><br>
+    店铺描述：：<textarea name="intro" id="" cols="30" rows="10">{{store.intro}}</textarea><br>
+    开店时间：{{store.opener_time}}<br>
+    店铺状态：{%if store.status == 0 %}
+                正常营业
+            {% elif store.status == 1 %}
+                暂停营业
+            {% elif store.status == 2 %}
+                永久删除
+            {% endif %} <br>
+    所属用户：{{store.users.username}}<br>
+<a href="{% url 'store:store_list' %}">所有店铺列表</a>
+<script src="/static/tiny_mce/tiny_mce.js"></script>
+<script>
+
+    tinyMCE.init({
+           "mode":"textareas",
+           "theme":"advanced",
+           "width":50,
+           "height":30
+
+   }) 
+
+</script>
+</body>
+</html>

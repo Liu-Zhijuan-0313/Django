@@ -10,7 +10,7 @@ def index(request):
     return render(request, "address/address_add.html")
 
 
-# 添加地址
+# 1.添加地址
 def address_add(request):
     if request.method == "GET":
         return render(request, "address/address_add.html")
@@ -36,12 +36,19 @@ def address_add(request):
         return redirect(reverse("address:address_readlist"))
 
 
-# 查看所有地址
+# 2.查看所有地址
 def address_readlist(request):
     if request.method == "GET":
+
+        # 判断是否登录
+        try:
+            username1 = request.session['loginuser']
+            user = models.Users.objects.get(username=username1)
+        except:
+            return redirect(reverse("users:login"))
+
         # 查看此用户的所有地址，不能参看其他人的地址
-        username = request.session['loginuser']
-        user = models.Users.objects.get(username=username)
+        user = models.Users.objects.get(username=username1)
         addressall = models.Address.objects.filter(users_id=user.id)
         print(addressall)
         for i in addressall:
@@ -49,22 +56,21 @@ def address_readlist(request):
         return render(request, "address/address_readlist.html", {"addressall": addressall})
 
 
-# 查看地址详情
+# 3.查看地址详情
 def address_read(request, id):
     if request.method == "GET":
         address = models.Address.objects.get(id=id)
+        return render(request, "address/address_read.html", {"address": address})
 
-        return render(request, "address/address_read.html",{"address": address})
 
-
-# 删除地址
+# 4.删除地址
 def address_delete(request, id):
     address = models.Address.objects.get(id=id)
     address.delete()
     return redirect(reverse("address:address_readlist"))
 
 
-# 修改地址
+# 5.修改地址
 def address_update(request, id):
     address1 = models.Address.objects.get(id=id)
     user = models.Users.objects.get(id=address1.users.id)

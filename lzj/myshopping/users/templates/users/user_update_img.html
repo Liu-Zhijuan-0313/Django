@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改用户头像</title>
+</head>
+<body>
+<h3>修改用户头像</h3>
+<form action="{% url 'users:user_update_img' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    用户头像: <img src="/{{user.header}}" alt="" width="100" ><br>
+    <input type="file" name="header"  placeholder="请输入你的用户头像"><br>
+    <input type="submit" value="修改头像">
+</form>
+</body>
+</html>

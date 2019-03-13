@@ -6,6 +6,7 @@
         <dd class="active">个人信息</dd>
         <dd>账户安全</dd>
         <dd>账号绑定</dd>
+
         <dd>我的级别</dd>
         <dd>收货地址</dd>
         <dd>应用授权</dd>
@@ -30,8 +31,11 @@
         <div class="addresses">
             <div class="address-item" style="width:900px;height:400px;">
                 <div class="smt">
-                    <a href="{% url 'users:userupdate' %}" class="pull-right delete">修改资料</a>
+                    <a href="{% url 'users:userupdate' %}" class="pull-right delete">完善资料</a>
                 </div>
+
+
+
 
                 <div style="float:left;width:150px;">
                     <div class="smc" style="float:left">
@@ -49,8 +53,13 @@
                 <div style="float:left;width:750px;">
                     <div class="smc">
                         <div class="item">
-                            <span class="fl label">登录账号：</span>
-                            <div class="detail">{{user.username}}</div>
+                            <span class="fl label"></span>
+                            <div class="detail">
+                                <a href="{% url 'users:user_update_img' %}" class="pull-left delete" style="font-size:18px;color:#333333; text-decoration:none;">修改头像</a>
+                            </div>
+                             <div class="detail">
+                                 <a href="{% url 'users:user_update_pwd' %}" class="pull-left delete"  style="font-size:18px;color:#333333; text-decoration:none;padding-left:10px">修改密码</a>
+                             </div>
                             <div class="clearfix"></div>
                         </div>
 
@@ -58,12 +67,13 @@
 
                     <div class="smc">
                         <div class="item">
-                            <span class="fl label">登录密码：</span>
-                            <div class="detail">{{user.userpass}}</div>
+                            <span class="fl label">登录账号：</span>
+                            <div class="detail">{{user.username}}</div>
                             <div class="clearfix"></div>
                         </div>
 
                     </div>
+
                     <div class="smc">
                         <div class="item">
                             <span class="fl label">用户昵称：</span>

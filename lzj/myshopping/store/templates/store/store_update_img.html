@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改店铺封面</title>
+</head>
+<body>
+<h3>修改店铺封面</h3>
+<form action="/store/{{store.id}}/store_update_img/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    店铺封面：<img src="/{{store.cover}}" alt="" width="100"><br>
+    <input type="file" name="cover" ><br>
+    <input type="submit" value="修改店铺">
+</form>
+
+</body>
+</html>

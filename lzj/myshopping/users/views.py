@@ -28,7 +28,7 @@ def create_code_img(request):
     return HttpResponse(b.getvalue())
 
 
-# 注册
+# 1.注册
 def register(request):
     if request.method == "GET":
         return render(request, "users/register1.html")
@@ -53,7 +53,7 @@ def register(request):
             return render(request, "users/register1.html", {"msg": msg})
 
 
-# 登录
+# 2.登录
 def login(request):
     if request.method == "GET":
         return render(request, "users/login1.html")
@@ -66,7 +66,7 @@ def login(request):
                 user = models.Users.objects.get(Q(username=username, userpass=userpass) | Q(email=username, userpass=userpass) | Q(phone=username, userpass=userpass))
                 request.session['loginuser'] = user.username
                 # return HttpResponse("登录成功")
-                return redirect(reverse("users:userinfo"))
+                return render(request, "index.html")
             except:
                 return render(request, "users/login1.html")
         else:
@@ -74,18 +74,28 @@ def login(request):
             return render(request, "users/login1.html", {"msg": msg})
 
 
-# 查看用户信息
+# 3.查看用户信息
 def userinfo(request):
-    username = request.session['loginuser']
+    # 判断是否登录
+    try:
+        username1 = request.session['loginuser']
+        user = models.Users.objects.get(username=username1)
+    except:
+        return redirect(reverse("users:login"))
     if request.method == "GET":
-        user = models.Users.objects.get(username=username)
+        user = models.Users.objects.get(username=username1)
         return render(request, "users/userinfo2.html", {"user": user})
 
 
-# 修改用户信息
+# 4.修改用户信息
 def userupdate(request):
-    username1 = request.session['loginuser']
-    user = models.Users.objects.get(username=username1)
+    # 判断是否登录
+    try:
+        username1 = request.session['loginuser']
+        user = models.Users.objects.get(username=username1)
+    except:
+        return redirect(reverse("users:login"))
+
     if request.method == "GET":
         return render(request, "users/userupdate2.html", {"user": user})
     elif request.method == "POST":
@@ -103,4 +113,60 @@ def userupdate(request):
             return redirect(reverse("users:userinfo"))
 
 
+# 5.修改用户头像
+def user_update_img(request):
+    # 判断是否登录
+    try:
+        username1 = request.session['loginuser']
+        user1 = models.Users.objects.get(username=username1)
+    except:
+        return redirect(reverse("users:login"))
 
+    if request.method == "GET":
+        return render(request, "users/user_update_img.html", {"user": user1})
+    elif request.method == "POST":
+        header = request.FILES["header"]
+
+        user = models.Users(id=user1.id,header=header, regist_time=user1.regist_time, username=user1.username, userpass=user1.userpass,
+                            nickname=user1.nickname, age=user1.age, gender=user1.gender, phone=user1.phone, email=user1.email)
+        user.save()
+        # return HttpResponse("修改完成")
+        return redirect(reverse("users:userinfo"))
+
+
+# 5.修改用户密码
+def user_update_pwd(request):
+    # 判断是否登录
+    try:
+        username1 = request.session['loginuser']
+        user1 = models.Users.objects.get(username=username1)
+    except:
+        return redirect(reverse("users:login"))
+
+    if request.method == "GET":
+        return render(request, "users/user_update_pwd2.html", {"user": user1})
+    elif request.method == "POST":
+        # userpass原密码，userpass01，userpass02新密码
+        userpass = request.POST.get("userpass")
+        userpass01 = request.POST.get("userpass01")
+        userpass02 = request.POST.get("userpass01")
+        if user1.userpass == userpass:
+
+            if userpass01 == userpass02:
+                user = models.Users(id=user1.id, header=user1.header, regist_time=user1.regist_time, username=user1.username,
+                                    userpass=userpass01,
+                                    nickname=user1.nickname, age=user1.age, gender=user1.gender, phone=user1.phone,
+                                    email=user1.email)
+                user.save()
+                # return HttpResponse("修改完成")
+                return redirect(reverse("users:userinfo"))
+        elif user1.userpass != userpass:
+            msg = "原密码输入不正确"
+            return render(request, "users/user_update_pwd2.html", {"user": user1, "msg": msg})
+
+
+# 6.退出登录
+def logout(request):
+    if request.method == "GET":
+        del request.session['loginuser']
+        return render(request, "index.html")

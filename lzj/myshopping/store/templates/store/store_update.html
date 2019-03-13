@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改店铺</title>
+</head>
+<body>
+<h3>修改店铺</h3>
+<form action="/store/{{store.id}}/store_update/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    店铺名称：<input type="text" name="name" value="{{store.name}}"><br>
+    店铺封面：<img src="/{{store.cover}}" alt="" width="100"><br>
+    店铺描述：<textarea name="intro" id="" cols="30" rows="10">{{store.intro}}</textarea><br>
+    店铺状态：{%if store.status == 0 %}
+                正常营业
+            {% elif store.status == 1 %}
+                暂停营业
+            {% elif store.status == 2 %}
+                永久删除
+            {% endif %} <br>
+    修改店铺状态:<input type="text" name="status" value="{{store.status}}"><br>
+    <input type="submit" value="修改店铺">
+</form>
+<!--富文本编辑器-->
+<script src="/static/tiny_mce/tiny_mce.js"></script>
+<script>
+    tinyMCE.init({
+           "mode":"textareas",
+           "theme":"advanced",
+           "width":500,
+           "height":300
+
+   }) 
+</script>
+</body>
+</html>

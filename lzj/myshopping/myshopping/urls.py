@@ -27,5 +27,7 @@ urlpatterns = [
     # 店铺
     url(r'^store/', include("store.urls", namespace="store")),
     # 首页面
-    url(r'^$', views.index)
+    url(r'^$', views.index),
+    # 基本模块
+    url(r'^base/$', views.base),
 ]

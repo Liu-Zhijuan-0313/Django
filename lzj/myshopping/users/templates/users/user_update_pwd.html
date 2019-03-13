@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改用户密码</title>
+</head>
+<body>
+<h3>修改用户密码</h3>
+<form action="{% url 'users:user_update_pwd' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{msg}}<br>
+    <input type="password" name="userpass"  placeholder="请输入你的原密码"><br>
+     <input type="password" name="userpass01"  placeholder="请输入你的新密码"><br>
+    <input type="password" name="userpass02"  placeholder="请再次输入你的新密码"><br>
+
+    <input type="submit" value="修改密码">
+</form>
+</body>
+</html>

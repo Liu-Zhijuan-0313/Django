@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>所有店铺列表</title>
+</head>
+<body>
+<h3>所有店铺列表</h3>
+{% for i in storeall %}
+
+    店铺名称：{{i.name}}<br>
+    店铺封面：<img src="/{{i.cover}}" alt="" width="100"><br>
+    店铺描述：<textarea name="intro" id="" cols="30" rows="10">{{i.intro}}</textarea><br>
+    开店时间：{{i.opener_time}}<br>
+    店铺状态：{%if i.status == 0 %}
+                正常营业
+            {% elif i.status == 1 %}
+                暂停营业
+            {% elif i.status == 2 %}
+                永久删除
+            {% endif %} <br>
+    所属用户：{{i.users.username}}<br>
+
+<a href="/store/{{i.id}}/store_detail">店铺详情</a>
+<a href="/store/{{i.id}}/store_update">修改店铺</a>
+<a href="/store/{{i.id}}/store_update_img">修改店铺封面</a>
+<a href="/store/{{i.id}}/store_delete">删除店铺</a>
+<hr>
+{% endfor %}
+<a href="{% url 'store:store_add' %}">添加店铺</a>
+
+<script src="/static/tiny_mce/tiny_mce.js"></script>
+<script>
+
+    tinyMCE.init({
+           "mode":"textareas",
+           "theme":"advanced",
+           "width":50,
+           "height":30
+
+   }) 
+
+</script>
+</body>
+</html>

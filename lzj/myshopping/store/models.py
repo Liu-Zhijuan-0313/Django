@@ -25,7 +25,7 @@ class Store(models.Model):
     # 店铺名称
     name = models.CharField(max_length=255, unique=True)
     # 店铺封面
-    cover = models.ImageField(upload_to="static/images/store", default="static/images/store/店铺封面.png")
+    cover = models.ImageField(upload_to="static/images/store", default="static/images/store/店铺封面.jpg")
     # 店铺描述
     # intro = models.TextField()
     intro = HTMLField()
