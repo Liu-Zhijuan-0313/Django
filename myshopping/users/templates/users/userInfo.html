@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>用户详情页面</title>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td>用户头像</td>
+                <td><img src="/{{request.user.userinfo.header}}" alt=""></td>
+            </tr>
+            <tr>
+                <td>用户名称</td>
+                <td>{{request.user}}</td>
+            </tr>
+            <tr>
+                <td>用户昵称</td>
+                <td>{{request.user.userinfo.nickname}}</td>
+            </tr>
+            <tr>
+                <td>用户电话</td>
+                <td>{{request.user.userinfo.phone}}</td>
+            </tr>
+        </table>
+    </body>
+</html>

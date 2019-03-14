@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录页面</title>
+</head>
+<body>
+    <h1>用户登录</h1>
+    <h2>{{msg}}==={{error_code}}</h2>
+    <form action="{% url 'users:user_login' %}" method="post">
+         {% csrf_token %}
+        用户名称：<input type="text" name="username"> <br>
+        <input type="hidden" name="next" value="{{next_url}}">
+        用户密码：<input type="text" name="password"> <br>
+        <input type="submit" value="用户登录">
+    </form>
+</body>
+</html>

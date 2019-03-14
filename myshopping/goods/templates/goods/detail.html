@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品详情页面</title>
+    <script src="/static/js/lib/jquery/jquery-1.12.4.js"></script>
+</head>
+<body>
+<h1>商品详情页面</h1>
+<div class="goods">
+    <div class="good-img">
+        <img src="/{{goods.goodsimage_set.all.first.path}}" alt="">
+    </div>
+    <div class="goods-name">
+        {{goods.name}}
+    </div>
+    <div class="goods-name">
+        {{goods.intro}}
+    </div>
+    <div class="goods-price">
+        单价{{goods.price}}|销量：{{goods.count}}
+    </div>
+    <div class="goods-sale">
+        <input type="number" id="count" value="1">
+        <button class="addGoods" goods_id="{{goods.id }}">添加购物车</button>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $(".addGoods").click(function () {
+            var $goods_id = $(this).attr("goods_id")
+            var $count = $("#count").val()
+            if ($count <= 0) {
+                alert("对不起，数量不能小于0")
+            }
+            $.ajax({
+                url: "/shopcart/"+ $count +"/" + $goods_id + "/add/",
+                type: "get",
+                success: function (msg) {
+                    alert(msg)
+                },
+                error: function (info) {
+                    alert("添加失败，请重新添加")
+                },
+            })
+        });
+
+
+    });
+
+</script>
+</body>
+</html>

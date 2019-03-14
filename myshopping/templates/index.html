@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>电商首页</title>
+        <script src="/static/js/lib/jquery/jquery-1.12.4.js"></script>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            ul,ol {
+                list-style: none;
+            }
+            .nav, .nav ul {
+                height: 50px;
+                width: 1300px;
+            }
+            .nav ul > li {
+                height: 50px;
+                width: 144px;
+                float: left;
+            }
+            .type2 {
+                display: none;
+            }
+            .layer {
+                width: 1360px;
+                height: 500px;
+            }
+            .goods {
+                width: 250px;
+                height: 400px;
+                border: 1px solid #CCCCCC;
+                margin: 5px;
+                border-radius: 3px;
+                float: left;
+            }
+             .goods > .good-img > img {
+                 width: 250px;
+                 height: 280px;
+             }
+        </style>
+    </head>
+    <body>
+        <h1>项目首页面</h1>
+        <div class="nav">
+            <ul>
+                <li><a href="/">网站首页</a></li>
+                <li><a href="{% url 'users:user_login'%}">用户登录</a></li>
+                <li><a href="{% url 'store:add'%}">用户开店</a></li>
+                <li><a href="{% url 'store:list'%}">查看自己的所有店铺</a></li>
+                <li><a href="{% url 'users:userinfo'%}">查看用户资料</a></li>
+                <li><a href="{% url 'users:register'%}">用户注册</a></li>
+                <li><a href="{% url 'users:user_logout'%}">用户退出</a></li>
+                <li><a href="{% url 'shopcart:list'%}">查看购物车</a></li>
+                <li><a href="">网站首页</a></li>
+            </ul>
+        </div>
+        <hr>
+        <h1>商品列表</h1>
+        <ul>
+        {% for type in allGoodsType%}
+            <li>
+                <span>{{type.name}}</span>
+                <ul class="type2">
+                    {% for type2 in type.goodstype_set.all %}
+                    <li>{{type2.name}}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% empty %}
+        <p>当前没有商品类型，请添加</p>
+        </ul>
+        {% endfor %}
+
+        <hr>
+        <div class="layer">
+            <h4>女装 / 男装 / 内衣1</h4>
+        {% for goods in goods1_list %}
+            <div class="goods">
+                <div class="good-img">
+                    <img src="/{{goods.goodsimage_set.all.first.path}}" alt="">
+                </div>
+                <div class="goods-name">
+                    {{goods.name}}| {{goods.goodstype.name}}==> {{goods.goodstype.parent.name}}
+                </div>
+                <div class="goods-name">
+                    {{goods.intro}}
+                </div>
+                <div class="goods-price">
+                    单价{{goods.price}}|销量：{{goods.count}}
+                </div>
+                <div class="goods-sale">
+                    <a href="{% url 'goods:detail' goods.id %}">商品详情</a>
+                    <!--<button class="addGoods" goods_id="{{goods.id }}">添加购物车</button>-->
+                    <!--<input type="hidden" name="{{goods.id }}" id="goods_id">-->
+                    <button class="addGoods" goods_id="{{goods.id }}">添加购物车</button>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        <hr>
+
+        <div class="layer">
+            <h4>女装 / 男装 / 内衣2</h4>
+        {% for goods in goods2_list %}
+            <div class="goods">
+                <div class="good-img">
+                    <img src="/{{goods.goodsimage_set.all.first.path}}" alt="">
+                </div>
+                <div class="goods-name">
+                    {{goods.name}}| {{goods.goodstype.name}}==> {{goods.goodstype.parent.name}}
+                </div>
+                <div class="goods-name">
+                    {{goods.intro}}
+                </div>
+                <div class="goods-price">
+                    单价{{goods.price}}|销量：{{goods.count}}
+                </div>
+                <div class="goods-sale">
+                    <a href="{% url 'goods:detail' goods.id %}">商品详情</a>
+                    <button class="addGoods" goods_id="{{goods.id }}">添加购物车</button>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        <hr>
+
+        <div class="layer">
+            <h4>女装 / 男装 / 内衣3</h4>
+        {% for goods in goods3_list %}
+            <div class="goods">
+                <div class="good-img">
+                    <img src="/{{goods.goodsimage_set.all.first.path}}" alt="">
+                </div>
+                <div class="goods-name">
+                    {{goods.name}}| {{goods.goodstype.name}}==> {{goods.goodstype.parent.name}}
+                </div>
+                <div class="goods-name">
+                    {{goods.intro}}
+                </div>
+                <div class="goods-price">
+                    单价{{goods.price}}|销量：{{goods.count}}
+                </div>
+                <div class="goods-sale">
+                    <a href="{% url 'goods:detail' goods.id %}">商品详情</a>
+                    <button class="addGoods" goods_id="{{goods.id }}">添加购物车</button>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        <hr>
+        <div class="layer">
+            <h4>女装 / 男装 / 内衣4</h4>
+            {% for goods in goods4_list %}
+            <div class="goods">
+                <div class="good-img">
+                    <img src="/{{goods.goodsimage_set.all.first.path}}" alt="">
+                </div>
+                <div class="goods-name">
+                    {{goods.name}}| {{goods.goodstype.name}}==> {{goods.goodstype.parent.name}}
+                </div>
+                <div class="goods-name">
+                    {{goods.intro}}
+                </div>
+                <div class="goods-price">
+                    单价{{goods.price}}|销量：{{goods.count}}
+                </div>
+                <div class="goods-sale">
+                    <a href="{% url 'goods:detail' goods.id %}">商品详情</a>
+                    <button class="addGoods" goods_id="{{goods.id }}">添加购物车</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <hr>
+
+         <div class="layer">
+            <h4>女装 / 男装 / 内衣5</h4>
+            {% for goods in goods5_list %}
+            <div class="goods">
+                <div class="good-img">
+                    <img src="/{{goods.goodsimage_set.all.first.path}}" alt="">
+                </div>
+                <div class="goods-name">
+                    {{goods.name}}| {{goods.goodstype.name}}==> {{goods.goodstype.parent.name}}
+                </div>
+                <div class="goods-name">
+                    {{goods.intro}}
+                </div>
+                <div class="goods-price">
+                    单价{{goods.price}}|销量：{{goods.count}}
+                </div>
+                <div class="goods-sale">
+                    <a href="{% url 'goods:detail' goods.id %}">商品详情</a>
+                    <button class="addGoods" goods_id="{{goods.id }}">添加购物车</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <hr>
+        <div class="layer">
+            <h4>女装 / 男装 / 内衣6</h4>
+            {% for goods in goods6_list %}
+            <div class="goods">
+                <div class="good-img">
+                    <img src="/{{goods.goodsimage_set.all.first.path}}" alt="">
+                </div>
+                <div class="goods-name">
+                    {{goods.name}}| {{goods.goodstype.name}}==> {{goods.goodstype.parent.name}}
+                </div>
+                <div class="goods-name">
+                    {{goods.intro}}
+                </div>
+                <div class="goods-price">
+                    单价{{goods.price}}|销量：{{goods.count}}
+                </div>
+                <div class="goods-sale">
+                    <a href="{% url 'goods:detail' goods.id %}">商品详情</a>
+                    <button class="addGoods" goods_id="{{goods.id }}">添加购物车</button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <script>
+
+            $(function () {
+
+               $(".addGoods").click(function () {
+                   var $goods_id = $(this).attr("goods_id")
+                   $.ajax({
+                       url : "/shopcart/1/"+ $goods_id +"/add/",
+                       type : "get",
+                       success : function (msg) {
+                           alert(msg)
+                       },
+                       error : function (info) {
+                           alert("添加失败，请重新添加")
+                       },
+                   })
+               });
+            });
+        </script>
+    </body>
+</html>

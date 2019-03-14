@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>上架商品</title>
+        <script src="/static/js/lib/jquery/jquery-1.12.4.js"></script>
+    </head>
+    <body>
+        <h1>上架商品</h1>
+        <form action="{% url 'goods:add' store_id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            商品名称：<input type="text" name="name" id="name"><br>
+            商品单价: <input type="number" name="price"><br>
+            商品库存：<input type="number" name="stock">
+            商品图片：<span class="files"><input type="file" name="cover" class="cover" ></span>
+            <input class="continue_add" type="button" value="继续添加"/> <br>
+            商品类型：
+                <select name="type1" id="type1">
+                    <option value="-1">请选择一级类型</option>
+                    {% for t in type1 %}
+                        <option value="{{t.id}}">{{t.name}}</option>
+                    {% endfor %}
+                </select>
+                <select name="type2" id="type2"></select><br>
+            商品介绍：<textarea name="intro" id="" cols="30" rows="10"></textarea>
+            <button>上架商品</button>
+        </form>
+        <script>
+
+            $(function () {
+                $(".continue_add").click(function () {
+                    $file = $("<input>");
+                    $file.attr("type", "file")
+                    $file.attr("name", "cover")
+                    $file.addClass("cover")
+                    $(".files").append($file)
+                });
+            })
+
+            $(function () {
+               $("#type1").on("change",function () {
+                   //$(this).val()
+                   $.ajax({
+                       url: "/goods/findTypeByPId/",
+                       type: "get",
+                       data: {"parent_id": $(this).val()},
+                       success: function (data) {
+                           $("#type2").empty()
+                           data = JSON.parse(data);
+                           for (var i = 0; i < data.length; i++) {
+                               var type = data[i];
+                               $op = $("<option>");
+                               $op.attr("value", type.pk)
+                               $op.text(type.fields.name)
+                               $("#type2").append($op)
+                           }
+                       },
+                       error: function () {
+                           alert("网络异常，请重新点击")
+                       }
+                   });
+
+
+               });
+
+
+            });
+
+        </script>
+    </body>
+</html>

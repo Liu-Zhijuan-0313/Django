@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>店铺详情页面</title>
+        <script src="/static/js/lib/jquery/jquery-1.12.4.js"></script>
+    </head>
+    <body>
+        <h1>店铺详情页面</h1>
+        <table border="1">
+            <tr>
+                <td>店铺封面</td>
+                <td><img style="height: 50px;" src="/{{store.cover}}" alt=""></td>
+            </tr>
+            <tr>
+                <td>店铺名称</td>
+                <td>{{store.name}}</td>
+            </tr>
+            <tr>
+                <td>状态</td>
+                <td>
+                    {% if store.status == 0%}
+                        <p>正在营业</p>
+                        <a href="{% url 'store:change' store.id 1 %}">暂停营业</a>
+                        <a href="{% url 'store:change' store.id 2 %}">删除店铺</a>
+                    {% elif store.status == 1 %}
+                        <p>暂停营业</p>
+                        <a href="{% url 'store:change' store.id 0 %}">开始营业</a>
+                        <a href="{% url 'store:change' store.id 2 %}">删除店铺</a>
+                     {% elif store.status == 2 %}
+                        <p>店铺已经删除，请联系管理员</p>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>操作</td>
+                <td>
+                    <a href="{% url 'store:update' store.id %}">修改店铺信息</a>
+                    <a href="{% url 'goods:add' store.id %}">上架商品</a>
+                </td>
+            </tr>
+        </table>
+        <hr>
+
+        <hr>
+        {% for g in goods %}
+        <img src="/{{g.goodsimage_set.all.first.path}}" alt="">
+        ==============={{g.name}}======={{g.price}}====={{g.stock}}<br>
+        <a href="{% url 'goods:detail' g.id %}">查看商品详情</a><br>
+        {% empty %}
+            当前商店没有上架商品
+        {% endfor%}
+
+    </body>
+</html>

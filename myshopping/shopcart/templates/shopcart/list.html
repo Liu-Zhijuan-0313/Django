@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>查看我的购物车</title>
+        <style>
+            img {
+                height: 80px;
+            }
+        </style>
+    </head>
+    <body>
+    <h1>查看购物车</h1>
+        <form action="{% url 'orders:confirm' %}" method="post">
+            {% csrf_token %}
+            <table>
+                {% for s in shopcarts %}
+                <tr>
+                    <td><input type="checkbox" name="g_id" value="{{s.id}}"></td>
+                    <td><img src="/{{s.goods.goodsimage_set.all.first.path}}" alt=""></td>
+                    <td>商品名称：{{s.goods.name}}</td>
+                    <td>商品数量：{{s.count}}</td>
+                    <td>商品数量：{{s.count}}</td>
+                    <td>小计金额：{{s.allTotal}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <button>确认订单</button>
+        </form>
+    </body>
+</html>
