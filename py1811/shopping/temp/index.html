@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>电商首页</title>
+</head>
+<body>
+<h3>项目首页面</h3>
+<h4><a href="/">网站首页</a></h4>
+<h4><a href="{% url 'users:user_login' %}">用户登录</a></h4>
+<h4><a href="{% url 'users:user_logout' %}">用户退出</a></h4>
+<h4><a href="{% url 'users:register' %}">用户注册</a></h4>
+<h4><a href="{% url 'users:userinfo' %}">用户信息</a></h4>
+<h4><a href="{% url 'store:add' %}">用户开店</a></h4>
+<h4><a href="{% url 'store:list' %}">用户所有店铺信息</a></h4>
+
+{% for x in allGoodType %}
+    {{x.gt_name}}<br>
+    {% for y in x.goodstype_set.all %}
+        {{y.gt_name}}
+    {% endfor %}<br>
+<hr>
+    {% empty %}
+    当前没有商品，请添加
+{% endfor %}
+
+</body>
+</html>

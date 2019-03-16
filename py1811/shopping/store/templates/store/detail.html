@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>店铺详情</title>
+    <script src="/static/js/lib/jquery-2.1.4.js"></script>
+</head>
+<body>
+<h3>店铺详情</h3>
+店铺封面：<img src="/{{store.cover}}" alt="" width="100"><br>
+店铺名称：{{store.name}}
+店铺状态：{{store.status}}<br>
+    {% if store.status == 0 %}
+        正在营业
+        <a href="{% url 'store:change' store.id 1 %}">暂停营业</a>
+        <a href="{% url 'store:change' store.id 2 %}">删除店铺</a>
+    {% elif store.status == 1 %}
+        暂停营业
+        <a href="{% url 'store:change' store.id 0 %}">开始营业</a>
+        <a href="{% url 'store:change' store.id 2 %}">删除店铺</a>
+    {% elif store.status == 2 %}
+    店铺已被删除，请联系管理员
+    {% endif %}
+操作：<a href="{% url 'store:update' store.id %}">修改店铺信息</a>
+<hr>
+<h3>上架商品</h3>
+<form action="" method="post">
+    {% csrf_token %}
+    商品名称：<input type="text" name="name" id="name"><br>
+    商品单价：<input type="number" name="price"><br>
+    商品库存：<input type="number" name="stock"><br>
+    <!--input:hidden-->
+    <input type="hidden" name="store" value="{{store.id}}">
+    商品图片：<input type="file" name="cover"><br><button>继续添加</button>
+    商品类型：<select name="type1" id="type1">
+                <option value="-1">请选择一级类型</option>
+                {% for x in type1 %}
+                <option value="{{x.id}}">{{x.gt_name}}</option>
+                {% endfor %}
+            </select>
+            <select name="type" id="type2">
+                <option value=""></option>
+            </select><br>
+    商品介绍：<textarea name="intro" id="" cols="30" rows="10"></textarea>
+</form>
+
+<script>
+    $(function(){
+        $("#type1").on("change",function(){
+            //alert(111)
+           //console.log($(this).val())
+           $.ajax({
+                url: "/goods/findTypeByPId/",
+                type: "get",
+                data: {"parent_id":$(this).val()},
+                success: function(data){
+                    console.info(data)
+                },
+                error:function(){
+                    alert("网络异常，请重新点击")
+                }
+           })
+        })
+    })
+</script>
+
+</body>
+</html>
