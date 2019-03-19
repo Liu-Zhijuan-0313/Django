@@ -24,5 +24,10 @@ urlpatterns = [
     url(r'^', include("commons.urls", namespace="commons")),
     # 店铺模块
     url(r'^store/', include("store.urls")),
-    url(r'^goods/$', include("goods.urls", namespace="goods")),
+    # 商品模块
+    url(r'^goods/', include("goods.urls", namespace="goods")),
+    # 购物车
+    url(r'^shopcart/', include("shopcart.urls", namespace="shopcart")),
+    # 地址
+    url(r'^address/', include("address.urls", namespace="address")),
 ]

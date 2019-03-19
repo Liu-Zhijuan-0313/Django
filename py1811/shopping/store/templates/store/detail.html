@@ -24,13 +24,13 @@
 操作：<a href="{% url 'store:update' store.id %}">修改店铺信息</a>
 <hr>
 <h3>上架商品</h3>
-<form action="" method="post">
+<form action="{% url 'goods:add' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     商品名称：<input type="text" name="name" id="name"><br>
     商品单价：<input type="number" name="price"><br>
     商品库存：<input type="number" name="stock"><br>
     <!--input:hidden-->
-    <input type="hidden" name="store" value="{{store.id}}">
+    <input type="hidden" name="store_id" value="{{store.id}}">
     商品图片：<input type="file" name="cover"><br><button>继续添加</button>
     商品类型：<select name="type1" id="type1">
                 <option value="-1">请选择一级类型</option>
@@ -38,23 +38,54 @@
                 <option value="{{x.id}}">{{x.gt_name}}</option>
                 {% endfor %}
             </select>
-            <select name="type" id="type2">
-                <option value=""></option>
-            </select><br>
+            <select name="type2" id="type2"></select><br>
     商品介绍：<textarea name="intro" id="" cols="30" rows="10"></textarea>
+    <input type="submit" value="上架商品">
 </form>
+<hr>
+{% for i in goods %}
+<img src="/{{i.goodsimage_set.all.first.path}}" alt="" width="100"><br>
+商品名：{{i.name}}<br>
+库存：{{i.stock}}<br>
+单价：{{i.price}}<br>
 
+<a href="{% url 'goods:detail' i.id %}">查看商品详情</a><br>
+
+{% empty %}
+当前商店没有上架商品
+{% endfor %}
 <script>
     $(function(){
         $("#type1").on("change",function(){
             //alert(111)
-           //console.log($(this).val())
+           console.log($(this).val())
            $.ajax({
                 url: "/goods/findTypeByPId/",
                 type: "get",
                 data: {"parent_id":$(this).val()},
                 success: function(data){
+
+                    //提前清空(id=type2)之前有的数据
+                    $("#type2").empty()
+
+                    //console.info(data)
+                    //字符串解析为DOM对象
+                    data = JSON.parse(data);
                     console.info(data)
+
+                    for (var i = 0;i < data.length;i++){
+
+                        //定义变量
+                        var type = data[i];
+                        //创建一个对象
+                        $op = $("<option>");
+                        //创建value属性，向后台传输id
+                        $op.attr("value", type.pk);
+                        //向页面展示数据
+                        $op.text(type.fields.gt_name);
+                        //在type2中加载数据
+                        $("#type2").append($op);
+                    }
                 },
                 error:function(){
                     alert("网络异常，请重新点击")
@@ -63,6 +94,5 @@
         })
     })
 </script>
-
 </body>
 </html>

@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_GET
 # Create your views here.
 from . import models
-from goods.models import GoodsType
+from goods.models import GoodsType, Goods
 
 
 # 添加店铺
@@ -60,7 +60,8 @@ def update(request, s_id):
 def detail(request, s_id):
     store = models.Store.objects.get(pk=s_id)
     type1 = GoodsType.objects.filter(parent=None)
-    return render(request, "store/detail.html", {"store": store, "type1": type1})
+    goods = Goods.objects.filter(stores=store)
+    return render(request, "store/detail.html", {"store": store, "type1": type1, "goods": goods})
 
 
 # 店铺状态

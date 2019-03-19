@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+</head>
+<body>
+<h3>购物车</h3>
+{% for i in shopcarts %}
+<input type="checkbox" name="g_id" value="{{i.goods.id}}"><br>
+<img src="/{{i.goods.goodsimage_set.first.path}}" alt="" width="100"><br>
+商品名称：{{i.goods.name}}<br>
+商品数量：{{i.count}}<br>
+{% endfor %}
+<button>确认订单</button>
+</body>
+</html>

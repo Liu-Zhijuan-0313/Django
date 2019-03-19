@@ -45,6 +45,10 @@ INSTALLED_APPS = [
     'store',
     # 商品
     'goods',
+    # 购物车
+    'shopcart',
+    # 地址
+    'address',
 
 ]
 
