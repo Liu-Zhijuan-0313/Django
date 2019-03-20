@@ -14,7 +14,8 @@
 <h4><a href="{% url 'users:userinfo' %}">用户信息</a></h4>
 <h4><a href="{% url 'store:add' %}">用户开店</a></h4>
 <h4><a href="{% url 'store:list' %}">用户所有店铺信息</a></h4>
-
+<h4><a href="{% url 'shopcart:list' %}">购物车</a></h4>
+<h4><a href="{% url 'address:address_list' %}">地址</a></h4>
 {% for x in allGoodType %}
     {{x.gt_name}}<br>
     {% for y in x.goodstype_set.all %}

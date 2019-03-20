@@ -30,4 +30,6 @@ urlpatterns = [
     url(r'^shopcart/', include("shopcart.urls", namespace="shopcart")),
     # 地址
     url(r'^address/', include("address.urls", namespace="address")),
+    # 订单
+    url(r'^orders/', include("orders.urls", namespace="orders")),
 ]

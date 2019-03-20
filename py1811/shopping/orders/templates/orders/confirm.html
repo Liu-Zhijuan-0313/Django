@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>确认订单</title>
+</head>
+<body>
+<h3>请确认需要提交的订单</h3>
+<form action="{% url 'orders:done' %}" method="post">
+    {% csrf_token %}
+    {% for i in shopcarts %}
+    <input type="hidden" name="s_id" value="{{i.id}}">
+        <img src="/{{i.goods.goodsimage_set.first.path}}" alt="" width="100"><br>
+        商品名称：{{i.goods.name}}<br>
+        商品数量：{{i.count}}<br>
+        金额：{{i.allTotal}}<br>
+    {% endfor %}
+
+    请选择收获地址：
+    {% for a in addresses %}
+        收货人{{a.id}}==={{a.recv_tel}}=={{a.province}}
+        {% if a.is_default %}
+        <!--<span style="color:red">默认地址</span>-->
+        <input type="radio" name="address" checked value="{{a.id}}">
+        {% else %}
+        <input type="radio" name="address"  value="{{a.id}}">
+        {% endif %}<br>
+
+        {% empty %}
+    {% endfor %}
+    <button>生成订单</button>
+</form>
+</body>
+</html>

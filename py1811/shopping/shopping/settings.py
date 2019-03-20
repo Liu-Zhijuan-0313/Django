@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'shopcart',
     # 地址
     'address',
+    # 订单
+    'orders',
 
 ]
 

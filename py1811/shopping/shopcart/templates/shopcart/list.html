@@ -6,12 +6,20 @@
 </head>
 <body>
 <h3>购物车</h3>
+<form action="{% url 'orders:confirm' %}" method="post">
+{% csrf_token %}
 {% for i in shopcarts %}
-<input type="checkbox" name="g_id" value="{{i.goods.id}}"><br>
+
+<input type="checkbox" name="g_id" value="{{i.id}}"><br>
+
 <img src="/{{i.goods.goodsimage_set.first.path}}" alt="" width="100"><br>
 商品名称：{{i.goods.name}}<br>
 商品数量：{{i.count}}<br>
+金额：{{i.allTotal}}<br>
 {% endfor %}
 <button>确认订单</button>
+
+</form>
+
 </body>
 </html>
