@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block contentleft %}
+<div class="yui3-u-1-6 list">
+    <dl>
+        <dt><i>·</i> 设置</dt>
+        <dd>个人信息</dd>
+        <dd class="active">修改用户信息</dd>
+        <dd>账号绑定</dd>
+        <dd>我的级别</dd>
+        <dd>收货地址</dd>
+        <dd>应用授权</dd>
+        <dd>快捷支付</dd>
+        <dd>企业发票</dd>
+        <dd>采购需求单</dd>
+    </dl>
+</div>
+{% endblock %}
+
+{% block contentright %}
+<!--右侧主内容-->
+<div class="yui3-u-5-6 body">
+    <div class="addressList">
+        <div class="mt">
+            <span class="fl"><strong>查看地址详情</strong></span>
+        </div>
+    </div>
+    <div class="address-detail">
+        <div class="addresses">
+            <div class="address-item" style="width:900px;margin:0 auto;">
+                <div class="smt">
+                    <a href="{% url 'address:address_list' %}" class="pull-right delete">查看地址列表</a>
+
+                </div>
+
+                <div style="width:750px;padding-left:200px;">
+
+                    <div class="smc">
+                        <div class="item">
+                            <span class="fl label">所属用户：</span>
+                            <div class="detail">{{address.user.username}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="smc">
+                        <div class="item">
+                            <span class="fl label">收货人姓名：</span>
+                            <div class="detail">{{address.recv_name}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+                    <div class="smc">
+                        <div class="item">
+                            <span class="fl label">收货人联系方式：</span>
+                            <div class="detail">{{address.recv_tel}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="smc">
+                        <div class="item">
+                            <span class="fl label">省区：</span>
+                            <div class="detail">{{address.province}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
+                    <div class="smc">
+                        <div class="item">
+                            <span class="fl label">市区：</span>
+                            <div class="detail">{{address.city}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
+                    <div class="smc">
+                        <div class="item">
+                            <span class="fl label">县区：</span>
+                            <div class="detail">{{address.area}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
+                    <div class="smc">
+                        <div class="item">
+                            <span class="fl label">街道：</span>
+                            <div class="detail">{{address.street}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                     <div class="smc">
+                        <div class="item">
+                            <span class="fl label">详细描述：</span>
+                            <div class="detail">{{address.desc}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                     <div class="smc">
+                        <div class="item">
+                            <span class="fl label">是否默认地址：</span>
+                            <div class="detail">
+                                {% if address.is_default %}
+                                是
+                                {% else %}
+                                否
+                                {% endif %}
+
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                </div>
+
+                    <div class="clearfix"></div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

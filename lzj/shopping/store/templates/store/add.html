@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>开店</title>
+</head>
+<body>
+<h3>开店</h3>
+<form action="{% url 'store:add' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+店铺名称：<input type="text" name="name"><br>
+    店铺封面：<input type="file" name="cover" id="cover"><br>
+    店铺描述：<textarea name="intro" id="" cols="30" rows="10"></textarea><br>
+    <input type="submit" value="开店">
+
+</form>
+
+<script src="/static/tiny_mce/tiny_mce.js"></script>
+<script>
+    tinyMCE.init({
+           "mode":"textareas",
+           "theme":"advanced",
+           "width":500,
+           "height":300
+   }) 
+
+</script>
+</body>
+</html>

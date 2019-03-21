@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %}我的所有店铺{% endblock %}
+{% block contentleft %}
+<div class="yui3-u-1-6 list">
+    <dl>
+        <dt><i>·</i> 设置</dt>
+        <dd><a href="{% url 'users:userinfo' %}">我的信息</a></dd>
+
+
+        <dd><a href="{% url 'address:address_list' %}">我的地址</a></dd>
+        <dd><a href="{% url 'store:add' %}">我要开店</a></dd>
+         <dd  class="active"><a href="{% url 'store:list' %}" style="color:red;">我的所有店铺</a></dd>
+        <dd><a href="{% url 'shopcart:list' %}">我的购物车</a></dd>
+        <dd><a href="{% url 'orders:list' %}">我的订单</a></dd>
+
+        <dd>快捷支付</dd>
+        <dd>企业发票</dd>
+        <dd>采购需求单</dd>
+    </dl>
+</div>
+{% endblock %}
+
+
+<!--右侧主内容-->
+{% block contentright %}
+<!--右侧主内容-->
+<div class="yui3-u-5-6 body">
+    <div class="addressList">
+        <div class="mt">
+            <span class="fl"><strong>我的所有店铺</strong></span>
+        </div>
+    </div>
+
+    <div class="address-detail">
+        <div class="addbtn">
+
+            <a href="{% url 'store:add' %}" class="sui-btn btn-bordered btn-xlarge btn-info">新增店铺</a>
+            <span class="topnum">您已创建1个收货地址，最多可创建20个</span>
+        </div>
+        <hr>
+
+        <div class="addresses">
+            {% for i in store %}
+            <div class="address-item" style="padding-left:10px;">
+
+                <div class="smt">&nbsp;
+                    <a href="{% url 'store:detail' i.id %}" class="pull-right delete">店铺详情</a>
+
+
+                </div>
+                <div class="smc">
+                    <div class="item">
+                        <span class="fl label">店铺名称：</span>
+                        <div class="detail">{{i.name}}</div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+                <div class="smc" style="float:left;padding-right:10px;">
+                    <div class="item" >
+                        <span class="fl label">店铺封面：</span><br>
+                        <div class="detail"><img src="/{{i.cover}}" alt="" width="300"></div>
+                        <div class="clearfix"></div>
+                    </div>
+
+           </div>
+                <div class="smc" style="" >
+                    <div class="item">
+                        <span class="fl label">店铺描述：</span><br>
+                        <div class="detail"><textarea name="intro" id="" cols="30" rows="10">{{i.intro}}</textarea></div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+            </div>
+            {% empty %}
+            你还没有店铺，赶紧去 <a href="{% url 'store:add' %}">开店</a>吧
+            {% endfor %}
+
+        </div>
+
+    </div>
+</div>
+<script src="/static/tiny_mce/tiny_mce.js"></script>
+<script>
+    tinyMCE.init({
+           "mode":"textareas",
+           "theme":"simple",
+           "width":400,
+           "height":300
+   }) 
+</script>
+{% endblock %}

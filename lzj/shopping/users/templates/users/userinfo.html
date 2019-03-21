@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>用户详情</h3>
+{{request.user}}<br>
+{{request.user.userinfo.nickname}}<br>
+<img src="/{{request.user.userinfo.header}}" alt="" width="100">
+<hr>
+
+{{user.username}}<br>
+{{user.userinfo.nickname}}<br>
+{{user.userinfo.phone}}
+</body>
+</html>

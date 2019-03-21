@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查看所有店铺</title>
+</head>
+<body>
+<h1>查看所有店铺</h1>
+{% for i in store %}
+店铺名称：{{i.name}}<br>
+店铺封面：<img src="/{{i.cover}}" alt="" width="100"><br>
+店铺描述：{{i.intro}}
+<a href="{% url 'store:detail' i.id %}">详情</a>
+<hr>
+{% empty %}
+你还没有店铺，赶紧去 <a href="{% url 'store:add' %}">开店</a>吧
+
+{% endfor %}
+</body>
+</html>

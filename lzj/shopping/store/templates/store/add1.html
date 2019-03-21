@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block title %}我要开店{% endblock %}
+{% block contentleft %}
+<div class="yui3-u-1-6 list">
+    <dl>
+        <dt><i>·</i> 设置</dt>
+        <dd><a href="{% url 'users:userinfo' %}">我的信息</a></dd>
+
+
+        <dd><a href="{% url 'address:address_list' %}">我的地址</a></dd>
+        <dd  class="active"><a href="{% url 'store:add' %}" style="color:red;">我要开店</a></dd>
+        <dd><a href="{% url 'store:list' %}">我的所有店铺</a></dd>
+        <dd><a href="{% url 'shopcart:list' %}">我的购物车</a></dd>
+        <dd><a href="{% url 'orders:list' %}">我的订单</a></dd>
+
+        <dd>快捷支付</dd>
+        <dd>企业发票</dd>
+        <dd>采购需求单</dd>
+    </dl>
+</div>
+{% endblock %}
+
+{% block contentright %}
+<!--右侧主内容-->
+<div class="yui3-u-5-6 body">
+    <div class="addressList">
+        <div class="mt">
+            <span class="fl"><strong>我要开店</strong></span>
+        </div>
+    </div>
+
+
+    <div class="address-detail">
+        <div class="addresses">
+            <div class="address-item" style="width:900px;margin:0 auto;">
+                <div class="smt">
+                    <a href="{% url 'store:list' %}" class="pull-right delete">查看店铺列表</a>
+
+                </div>
+
+
+
+                <div style="width:750px;padding-left:100px;">
+
+
+                    <form action="{% url 'store:add' %}" method="post" id="reg_form"
+                          class="sui-form form-horizontal" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <p style="color:red;padding-left:200px;">{{msg}}</p><br>
+                        <div class="control-group">
+                            <label for="inputrecv_name" class="control-label">店铺名称:</label>
+                            <div class="controls">
+                                <input type="text" id="inputrecv_name" name="name" placeholder="请输入店铺名称"
+                                       class="input-xfat input-xlarge" >
+                                <span class="error"></span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="cover" class="control-label">店铺封面:</label>
+                            <div class="controls">
+
+                                <input type="file" id="cover" name="cover"
+                                       class="input-xfat input-xlarge">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+                        <label class="control-label">店铺描述:</label>
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <textarea name="intro" id="" cols="30" rows="10"></textarea>
+
+                                <span class="error"></span>
+                            </div>
+                        </div>
+
+
+                        <br>
+                        <div class="control-group">
+                            <label class="control-label"></label>
+                            <div class="controls btn-reg">
+                                <input type="submit" class="sui-btn btn-block btn-xlarge btn-info reg-btn"
+                                       value="确定开店" style="width:100px;">
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <div class="clearfix"></div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="/static/tiny_mce/tiny_mce.js"></script>
+<script>
+    tinyMCE.init({
+           "mode":"textareas",
+           "theme":"advanced",
+           "width":500,
+           "height":300
+   }) 
+</script>
+{% endblock %}

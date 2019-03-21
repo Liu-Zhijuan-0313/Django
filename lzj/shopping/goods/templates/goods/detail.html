@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品详情页面</title>
+    <script src="/static/js/lib/jquery-2.1.4.js"></script>
+</head>
+<body>
+<h3>商品详情</h3>
+<img src="/{{goods.goodsimage_set.all.first.path}}" alt="" width="100"><br>
+商品名称：{{goods.name}}<br>
+库存：{{goods.stock}}<br>
+单价：{{goods.price}}<br>
+描述：{{goods.intro}}<br>
+销量：{{goods.count}}<br>
+类型：{{goods.goodstype.gt_name}}<br>
+父类型：{{goods.goodstype.parent.gt_name}}<br>
+<input type="number" id="count" value="1">
+<!--<a href="/shopcart/1/{{goods.id}}/add/">加入购物车</a>-->
+<button class="addgoods" goods_id="{{goods.id}}">加入购物车</button>
+
+
+<script>
+    $(function(){
+        $(".addgoods").click(function(){
+
+            //alert("111")
+            //alert($(this).attr("goods_id"))
+            //alert($("#count").val())
+            var $goods_id = $(this).attr("goods_id")
+            var $count = $("#count").val()
+            if ($count <= 0){
+                alert("对不起，不能小于0")
+            }
+
+            $.ajax({
+                url: "/shopcart/"+$count +"/" + $goods_id + "/add/",
+                type: "get",
+                success: function(msg){
+                    alert("加入购物车")
+                },
+                error:function(){
+                    alert("添加失败，请重新添加")
+                },
+            })
+
+        })
+    })
+</script>
+</body>
+</html>

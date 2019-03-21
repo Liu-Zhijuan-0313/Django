@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% block contentleft %}
+<div class="yui3-u-1-6 list">
+    <dl>
+        <dt><i>·</i> 设置</dt>
+        <dd class="active">个人信息</dd>
+        <dd>账户安全</dd>
+        <dd>账号绑定</dd>
+
+        <dd>我的级别</dd>
+        <dd>收货地址</dd>
+        <dd>应用授权</dd>
+        <dd>快捷支付</dd>
+        <dd>企业发票</dd>
+        <dd>采购需求单</dd>
+    </dl>
+
+</div>
+{% endblock %}
+{% block contentright %}
+<!--右侧主内容-->
+<div class="yui3-u-5-6 body">
+    <div class="addressList">
+        <div class="mt">
+            <span class="fl"><strong>个人资料</strong></span>
+        </div>
+    </div>
+
+    <div class="address-detail">
+
+        <div class="addresses">
+            <div class="address-item" style="width:900px;height:400px;">
+                <div class="smt">
+                    <a href="{% url 'users:userupdate' %}" class="pull-right delete">完善资料</a>
+                </div>
+
+
+
+
+                <div style="float:left;width:150px;">
+                    <div class="smc" style="float:left">
+                        <div class="item">
+                            <span class="fl label"></span>
+                            <div class="detail"><img src="/{{user.userinfo.header}}" alt=""
+                                                     style="width: 100px;height: 100px;border-radius: 50%;margin: 0 auto;">
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div style="float:left;width:750px;">
+                    <div class="smc">
+                        <div class="item">
+                            <span class="fl label"></span>
+                            <div class="detail">
+                                <a href="{% url 'users:user_update_img' %}" class="pull-left delete" style="font-size:18px;color:#333333; text-decoration:none;">修改头像</a>
+                            </div>
+                             <div class="detail">
+                                 <a href="{% url 'users:user_update_pwd' %}" class="pull-left delete"  style="font-size:18px;color:#333333; text-decoration:none;padding-left:10px">修改密码</a>
+                             </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="smc">
+                        <div class="item">
+                            <span class="fl label">登录账号：</span>
+                            <div class="detail">{{user.username}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="smc">
+                        <div class="item">
+                            <span class="fl label">用户昵称：</span>
+                            <div class="detail">{{user.userinfo.nickname}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+                    <div class="smc">
+                        <div class="item">
+                            <span class="fl label">用户年龄：</span>
+                            <div class="detail">{{user.userinfo.age}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+                    <div class="smc">
+                        <div class="item">
+                            <span class="fl label">用户性别：</span>
+                            <div class="detail">{{user.userinfo.gender}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="smc">
+                        <div class="item">
+                            <span class="fl label">联系方式：</span>
+                            <div class="detail">{{user.userinfo.phone}}</div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

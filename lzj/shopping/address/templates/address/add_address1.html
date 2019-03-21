@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% block contentleft %}
+<div class="yui3-u-1-6 list">
+    <dl>
+        <dt><i>·</i> 设置</dt>
+        <dd>个人信息</dd>
+        <dd class="active">修改用户信息</dd>
+        <dd>账号绑定</dd>
+        <dd>我的级别</dd>
+        <dd>收货地址</dd>
+        <dd>应用授权</dd>
+        <dd>快捷支付</dd>
+        <dd>企业发票</dd>
+        <dd>采购需求单</dd>
+    </dl>
+</div>
+{% endblock %}
+
+{% block contentright %}
+<!--右侧主内容-->
+<div class="yui3-u-5-6 body">
+    <div class="addressList">
+        <div class="mt">
+            <span class="fl"><strong>修改用户信息</strong></span>
+        </div>
+    </div>
+
+
+    <div class="address-detail">
+        <div class="addresses">
+            <div class="address-item" style="width:900px;margin:0 auto;">
+                <div class="smt">
+                    <a href="{% url 'address:address_list' %}" class="pull-right delete">查看地址列表</a>
+
+                </div>
+
+
+
+                <div style="width:750px;padding-left:200px;">
+
+
+                    <form action="{% url 'address:address_add' %}" method="post" id="reg_form"
+                          class="sui-form form-horizontal" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <p style="color:red;padding-left:200px;">{{msg}}</p><br>
+                        <div class="control-group">
+                            <label for="inputrecv_name" class="control-label">收货人:</label>
+                            <div class="controls">
+                                <input type="text" id="inputrecv_name" name="recv_name" placeholder="请输入收货人"
+                                       class="input-xfat input-xlarge" >
+                                <span class="error"></span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="inputrecv_phone" class="control-label">联系方式:</label>
+                            <div class="controls">
+                                <input type="text" id="inputrecv_phone" name="recv_tel" placeholder="请输入收货人联系方式"
+                                       class="input-xfat input-xlarge">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="inputprovice" class="control-label">省区:</label>
+                            <div class="controls">
+                                <input type="text" id="inputprovice" name="province" placeholder="请输入你的用户性别"
+                                       class="input-xfat input-xlarge">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="inputcity" class="control-label">市区:</label>
+                            <div class="controls">
+                                <input type="text" id="inputcity" name="city" placeholder="请输入你的市区"
+                                       class="input-xfat input-xlarge">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label for="inputcountry" class="control-label">县区:</label>
+                            <div class="controls">
+                                <input type="text" id="inputcountry" name="area" placeholder="请输入你的县区"
+                                       class="input-xfat input-xlarge">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+
+
+                         <div class="control-group">
+                            <label for="inputstreet" class="control-label">街道:</label>
+                            <div class="controls">
+                                <input type="text" id="inputstreet" name="street" placeholder="请输入你的街道"
+                                       class="input-xfat input-xlarge">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+                         <div class="control-group">
+                            <label for="inputdesc" class="control-label">详细描述:</label>
+                            <div class="controls">
+                                <input type="text" id="inputdesc" name="desc" placeholder="请输入你的详细描述"
+                                       class="input-xfat input-xlarge">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="inputstatus1" class="control-label"> 默认地址: </label>
+                            <div class="controls">
+                               <input type="checkbox" id="inputstatus1" name="is_default" value="true">
+
+                                <span class="error"></span>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="control-group">
+                            <label class="control-label"></label>
+                            <div class="controls btn-reg">
+                                <input type="submit" class="sui-btn btn-block btn-xlarge btn-info reg-btn"
+                                       value="确定添加" style="width:100px;">
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <div class="clearfix"></div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

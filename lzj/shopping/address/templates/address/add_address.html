@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加地址</title>
+</head>
+<body>
+<h3>添加地址</h3>
+<form action="" method="post">
+    {% csrf_token %}
+    收货人: <input type="text" name="recv_name">
+    收货人的电话号码: <input type="text" name="recv_tel">
+    收货人的省份: <input type="text" name="province">
+    收货人的城市: <input type="text" name="city">
+    收货人的县区: <input type="text" name="area">
+    收货人的街道:  <input type="text" name="street">
+    详细地址: <input type="text" name="desc">
+    是否是默认地址: <input type="checkbox" name="is_default" value="true">
+    <input type="submit" value="添加地址">
+</form>
+</body>
+</html>
