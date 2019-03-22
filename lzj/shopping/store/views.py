@@ -54,7 +54,7 @@ def update(request, s_id):
             # store = models.Store(name=name, intro=intro, user=request.user)
         store.save()
         # return redirect(reverse("store:detail", kwargs={"s_id": store.id}))
-        return redirect(reverse("store:detail", kwargs={"s_id": store.id}))
+        return redirect(reverse("store:detail1", kwargs={"s_id": store.id}))
 
 
 @require_GET
@@ -63,7 +63,7 @@ def detail(request, s_id):
     store = models.Store.objects.get(pk=s_id)
     type1 = GoodsType.objects.filter(parent=None)
     goods = Goods.objects.filter(stores=store)
-    return render(request, "store/detail.html", {"store": store, "type1": type1, "goods": goods})
+    return render(request, "store/detail1.html", {"store": store, "type1": type1, "goods": goods})
 
 
 # 店铺状态
@@ -76,4 +76,4 @@ def change(request, s_id, status):
     if store.status == 2:
         return redirect(reverse("store:list"))
     else:
-        return render(request, "store/detail.html", {"store": store})
+        return render(request, "store/detail1.html", {"store": store})

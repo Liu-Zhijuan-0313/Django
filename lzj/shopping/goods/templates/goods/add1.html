@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block title %}我要上架商品{% endblock %}
+
+
+{% block contentright %}
+<!--右侧主内容-->
+<div class="yui3-u-5-6 body">
+    <div class="addressList">
+        <div class="mt">
+            <span class="fl"><strong>我要上架商品</strong></span>
+        </div>
+    </div>
+
+
+    <div class="address-detail">
+        <div class="addresses">
+            <div class="address-item" style="width:900px;margin:0 auto;">
+                <div class="smt">
+                    <a href="{% url 'goods:list' %}" class="pull-right delete">查看商品列表</a>
+
+                </div>
+
+                <div style="width:750px;padding-left:100px;">
+
+
+                    <form action="{% url 'goods:add' s_id %}" method="post" id="reg_form"
+                          class="sui-form form-horizontal" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <p style="color:red;padding-left:200px;">{{msg}}</p><br>
+                        <div class="control-group">
+                            <label for="inputname" class="control-label">商品名称:</label>
+                            <div class="controls">
+                                <input type="text" id="inputname" name="name" placeholder="请输入商品名称"
+                                       class="input-xfat input-xlarge">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="inputprice" class="control-label">商品单价:</label>
+                            <div class="controls">
+                                <input type="number" id="inputprice" name="price" placeholder="请输入商品名称"
+                                       class="input-xfat input-xlarge">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="inputstock" class="control-label">商品库存:</label>
+                            <div class="controls">
+                                <input type="number" id="inputstock" name="stock" placeholder="请输入商品名称"
+                                       class="input-xfat input-xlarge">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="cover" class="control-label">商品图片:</label>
+                            <div class="controls">
+
+                                <input type="file" id="cover" name="cover"
+                                       class="input-xfat input-xlarge">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="cover" class="control-label">商品类型:</label>
+                            <div class="controls">
+
+                                <select name="type1" id="type1">
+                                    <option value="-1">请选择一级类型</option>
+                                    {% for x in type1 %}
+                                    <option value="{{x.id}}">{{x.gt_name}}</option>
+                                    {% endfor %}
+                                </select>
+                                <select name="type2" id="type2"></select><br>
+                                <span class="error"></span>
+                            </div>
+                        </div>
+
+                        <label class="control-label">商品介绍:</label>
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <textarea name="intro" id="" cols="30" rows="10"></textarea>
+                                <span class="error"></span>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="control-group">
+                            <label class="control-label"></label>
+                            <div class="controls btn-reg">
+                                <input type="submit" class="sui-btn btn-block btn-xlarge btn-info reg-btn"
+                                       value="确定上架" style="width:100px;">
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <div class="clearfix"></div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="/static/tiny_mce/tiny_mce.js"></script>
+<script>
+    tinyMCE.init({
+           "mode":"textareas",
+           "theme":"advanced",
+           "width":500,
+           "height":300
+   }) 
+
+</script>
+<script>
+    $(function(){
+        $("#type1").on("change",function(){
+            //alert(111)
+           console.log($(this).val())
+           $.ajax({
+                url: "/goods/findTypeByPId/",
+                type: "get",
+                data: {"parent_id":$(this).val()},
+                success: function(data){
+
+                    //提前清空(id=type2)之前有的数据
+                    $("#type2").empty()
+
+                    //console.info(data)
+                    //字符串解析为DOM对象
+                    data = JSON.parse(data);
+                    console.info(data)
+
+                    for (var i = 0;i < data.length;i++){
+
+                        //定义变量
+                        var type = data[i];
+                        //创建一个对象
+                        $op = $("<option>");
+                        //创建value属性，向后台传输id
+                        $op.attr("value", type.pk);
+                        //向页面展示数据
+                        $op.text(type.fields.gt_name);
+                        //在type2中加载数据
+                        $("#type2").append($op);
+                    }
+                },
+                error:function(){
+                    alert("网络异常，请重新点击")
+                }
+           })
+        })
+    })
+</script>
+
+{% endblock %}

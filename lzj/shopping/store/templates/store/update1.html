@@ -1,30 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %}我要开店{% endblock %}
-{% block contentleft %}
-<div class="yui3-u-1-6 list">
-    <dl>
-        <dt><i>·</i> 设置</dt>
-        <dd><a href="{% url 'users:userinfo' %}">我的信息</a></dd>
-        <dd><a href="{% url 'address:address_list' %}">我的地址</a></dd>
-        <dd><a href="{% url 'store:add' %}">我要开店</a></dd>
-        <dd><a href="{% url 'store:list' %}">我的所有店铺</a></dd>
-        <dd><a href="{% url 'shopcart:list' %}">我的购物车</a></dd>
-        <dd><a href="{% url 'orders:list' %}">我的订单</a></dd>
+{% block title %}修改店铺资料{% endblock %}
 
-        <dd>快捷支付</dd>
-        <dd>企业发票</dd>
-        <dd>采购需求单</dd>
-    </dl>
-</div>
-{% endblock %}
 
 {% block contentright %}
 <!--右侧主内容-->
 <div class="yui3-u-5-6 body">
     <div class="addressList">
         <div class="mt">
-            <span class="fl"><strong>我要修改店铺信息</strong></span>
+            <span class="fl"><strong>修改店铺资料</strong></span>
         </div>
     </div>
 

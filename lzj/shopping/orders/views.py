@@ -1,24 +1,27 @@
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, reverse
 from django.views.decorators.http import require_POST
 from shopcart.models import ShopCart
 from goods.models import Goods
 from address.models import Address
+from goods.models import GoodsType
 from . import models
 # Create your views here.
 
 
-@require_POST
 def confirm(request):
     # 从购物车的list页面传过来的g_id,
     # getlist可以接受多个
-
-    g_ids = request.POST.getlist("g_id")
-    # print(g_ids)
-    shopcarts = ShopCart.objects.filter(pk__in=g_ids)
-    # print(shopcarts)
-    addresses = Address.objects.filter(user=request.user)
-    return render(request, "orders/confirm1.html", {"addresses": addresses, "shopcarts": shopcarts})
+    if request.method == "GET":
+        return render(request, "orders/confirm1.html")
+    if request.method == "POST":
+        g_ids = request.POST.getlist("g_id")
+        # print(g_ids)
+        shopcarts = ShopCart.objects.filter(pk__in=g_ids)
+        # print(shopcarts)
+        addresses = Address.objects.filter(user=request.user)
+        return render(request, "orders/confirm1.html", {"addresses": addresses, "shopcarts": shopcarts})
 
 
 def pay(request):
@@ -55,13 +58,16 @@ def done(request):
         return redirect(reverse("orders:list"))
 
 
+@login_required()
 def list(request):
+    allGoodType = GoodsType.objects.filter(parent=None)
     orders = models.Order.objects.filter(user=request.user)
-    return render(request, "orders/list1.html", {"orders": orders})
+    return render(request, "orders/list1.html", {"orders": orders,"allGoodType": allGoodType})
 
 
 def detail(request, o_id):
-    pass
+    order = models.Order.objects.get(id=o_id)
+    return render(request, "orders/detail1.html", {"order": order})
 
 
 def delete(request, o_id):

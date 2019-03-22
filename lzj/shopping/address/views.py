@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, reverse
 from . import models
 from users.models import Userinfo
@@ -41,6 +42,7 @@ def address_add(request):
 
 
 # 2.地址列表
+@login_required()
 def address_list(request):
     address = models.Address.objects.filter(user=request.user)
     # print(address)

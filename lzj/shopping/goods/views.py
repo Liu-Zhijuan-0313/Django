@@ -8,9 +8,34 @@ from goods.models import Goods, GoodsType
 # 商品添加
 
 
-def add(request):
+# def add(request):
+#     if request.method == "GET":
+#         return render(request, "goods/add.html")
+#     elif request.method == "POST":
+#         name = request.POST["name"]
+#         price = request.POST["price"]
+#         stock = request.POST["stock"]
+#         intro = request.POST["intro"]
+#         cover = request.FILES["cover"]
+#
+#         store_id = request.POST["store_id"]
+#         store = models.Store.objects.get(id=store_id)
+#         type2 = request.POST["type2"]
+#         goodstype = models.GoodsType.objects.get(id=type2)
+#
+#         goods = models.Goods(name=name, price=price, stock=stock, intro=intro, stores=store, goodstype=goodstype)
+#         goods.save()
+#         goodsimage = models.GoodsImage(path=cover, goods=goods)
+#         goodsimage.save()
+#         return redirect(reverse("store:detail", kwargs={"s_id": store_id}))
+
+
+def add(request, s_id):
     if request.method == "GET":
-        return render(request, "goods/add.html")
+        store = models.Store.objects.get(pk=s_id)
+        type1 = GoodsType.objects.filter(parent=None)
+        goods = Goods.objects.filter(stores=store)
+        return render(request, "goods/add1.html", {"s_id": s_id, "store": store, "type1": type1, "goods": goods})
     elif request.method == "POST":
         name = request.POST["name"]
         price = request.POST["price"]
@@ -18,8 +43,8 @@ def add(request):
         intro = request.POST["intro"]
         cover = request.FILES["cover"]
 
-        store_id = request.POST["store_id"]
-        store = models.Store.objects.get(id=store_id)
+        # store_id = request.POST["store_id"]
+        store = models.Store.objects.get(id=s_id)
         type2 = request.POST["type2"]
         goodstype = models.GoodsType.objects.get(id=type2)
 
@@ -27,7 +52,8 @@ def add(request):
         goods.save()
         goodsimage = models.GoodsImage(path=cover, goods=goods)
         goodsimage.save()
-        return redirect(reverse("store:detail", kwargs={"s_id": store_id}))
+        return redirect(reverse("store:detail", kwargs={"s_id": s_id}))
+
 
 
 @require_GET

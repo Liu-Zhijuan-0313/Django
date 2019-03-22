@@ -25,28 +25,68 @@
 					<div class="shortcut">
 						<ul class="fl">
 							<li class="f-item">品优购欢迎您！</li>
-							<li class="f-item">请<a href="login.html" target="_blank">登录</a>　<span><a href="register.html" target="_blank">免费注册</a></span></li>
+							{% if request.user %}
+                        <li class="f-item"><a href="{% url 'users:userinfo' %}" target="_blank"
+                                              style="color:red; text-decoration:none;">{{request.user }}</a></li>
+
+
+                        {% else %}
+                        <li class="f-item">请<a href="{% url 'users:user_login' %}" target="_blank">登录</a>　
+                            <span><a href="{% url 'users:register' %}" target="_blank">免费注册</a></span>
+                        </li>
+                        {% endif %}
 						</ul>
 						<ul class="fr">
-							<li class="f-item">我的订单</li>
-							<li class="f-item space"></li>
-							<li class="f-item"><a href="home.html" target="_blank">我的品优购</a></li>
-							<li class="f-item space"></li>
-							<li class="f-item">品优购会员</li>
-							<li class="f-item space"></li>
-							<li class="f-item">企业采购</li>
-							<li class="f-item space"></li>
-							<li class="f-item">关注品优购</li>
-							<li class="f-item space"></li>
-							<li class="f-item" id="service">
-								<span>客户服务</span>
-								<ul class="service">
-									<li><a href="cooperation.html" target="_blank">合作招商</a></li>
-									<li><a href="shoplogin.html" target="_blank">商家后台</a></li>
-								</ul>
-							</li>
-							<li class="f-item space"></li>
-							<li class="f-item">网站导航</li>
+							 <li class="f-item"><a href="{% url 'users:userinfo' %}" target="_blank"
+                                              style="color:#333333; text-decoration:none;">我的信息</a>
+                        </li>
+                        <li class="f-item space"></li>
+                        <li class="f-item"><a href="{% url 'address:address_list' %}" target="_blank"
+                                              style="color:#333333; text-decoration:none;">我的地址</a>
+                        </li>
+                        <li class="f-item space"></li>
+                        <li class="f-item"><a href="{% url 'store:add' %}" target="_blank"
+                                              style="color:#333333; text-decoration:none;">我要开店</a>
+                        </li>
+
+                        <li class="f-item space"></li>
+                         <li class="f-item"><a href="{% url 'goods:list' %}" target="_blank"
+                                              style="color:#333333; text-decoration:none;">商品列表</a>
+                        </li>
+
+                        {% if request.user %}
+                        <li class="f-item"><a href="{% url 'users:user_logout' %}" target="_blank"
+                                              style="color:#333333; text-decoration:none;">退出登录</a>
+                        </li>
+                        <li class="f-item space"></li>
+                        {% endif %}
+
+
+                        <li class="f-item"><a href="{% url 'orders:list' %}" target="_blank"
+                                              style=" text-decoration:none;">我的订单</a></li>
+                        <li class="f-item space"></li>
+
+                        <li class="f-item"><a href="{% url 'shopcart:list' %}" target="_blank"
+                                              style="color:#333333; text-decoration:none;">我的购物车</a></li>
+                        <li class="f-item space"></li>
+
+
+                        <li class="f-item" id="service">
+                            <span>网站导航</span>
+                            <ul class="service">
+                                <li><a href="{% url 'users:userinfo' %}" target="_blank"
+                                              style="text-decoration:none;">我的信息</a></li>
+                                <li><a href="{% url 'address:address_list' %}" target="_blank"
+                                              style="text-decoration:none;">我的地址</a></li>
+                                <li><a href="{% url 'store:add' %}" target="_blank"
+                                              style="text-decoration:none;">我要开店</a></li>
+                                <li><a href="{% url 'shopcart:list' %}" target="_blank"
+                                              style="text-decoration:none;">购物车</a></li>
+                                <li><a href="{% url 'orders:list' %}" target="_blank"
+                                              style=" text-decoration:none;">我的订单</a></li>
+                            </ul>
+                        </li>
+                        <li class="f-item space"></li>
 						</ul>
 					</div>
 				</div>
@@ -62,6 +102,7 @@
 						<div class="yui3-u Center searchArea">
 							<div class="search">
 								<form action="" class="sui-form form-inline">
+									{% csrf_token %}
 									<!--searchAutoComplete-->
 									<div class="input-append">
 										<input type="text" id="autocomplete" type="text" class="input-error input-xxlarge" />
@@ -543,6 +584,7 @@
 						      </div>
 						      <div class="modal-body">
 						      	<form action="" class="sui-form form-horizontal">
+									{% csrf_token %}
 						      		 <div class="control-group">
 									    <label class="control-label">收货人：</label>
 									    <div class="controls">

@@ -1,8 +1,10 @@
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, reverse
 from django.views.decorators.http import require_GET
 from django.contrib.auth.decorators import login_required
 from . import models
+from goods.models import GoodsType
 
 @require_GET
 @login_required()
@@ -26,9 +28,11 @@ def add(request, count, good_id):
     return redirect(reverse("shopcart:list"))
 
 
+@login_required()
 def list(request):
+    allGoodType = GoodsType.objects.filter(parent=None)
     shopcarts = models.ShopCart.objects.filter(user=request.user).order_by("-addTime")
-    return render(request, "shopcart/list1.html", {"shopcarts": shopcarts})
+    return render(request, "shopcart/list1.html", {"shopcarts": shopcarts,"allGoodType": allGoodType})
 
 
 def delete(request, s_id):

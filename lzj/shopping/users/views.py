@@ -38,7 +38,7 @@ def user_login(request):
 
         # 如果为空，加/,跳转到首页面
         next_url = request.POST.get("next", "/")
-
+        print(next_url)
         #  If the given credentials are valid, return a User object.
         # 如果验证通过，返回用户对象
         # 等价于User.objects.filter(username=username, password=password).fister()
@@ -95,10 +95,12 @@ def register(request):
 from django.contrib.auth.decorators import login_required
 # 规定登录用户之后才访问
 # 4.退出
-@login_required
+
+
 def user_logout(request):
     logout(request)
-    return render(request, "users/login1.html", {"error_code": 4, "msg": "退出成功，请重新登录"})
+    return redirect(reverse("users:user_login"))
+    # return render(request, "users/login1.html", {"error_code": 4, "msg": "退出成功，请重新登录"})
 
 
 @login_required

@@ -1,20 +1,7 @@
 {% extends 'base.html' %}
-{% block contentleft %}
-<div class="yui3-u-1-6 list">
-    <dl>
-        <dt><i>·</i> 设置</dt>
-        <dd>个人信息</dd>
-        <dd class="active">修改用户信息</dd>
-        <dd>账号绑定</dd>
-        <dd>我的级别</dd>
-        <dd>收货地址</dd>
-        <dd>应用授权</dd>
-        <dd>快捷支付</dd>
-        <dd>企业发票</dd>
-        <dd>采购需求单</dd>
-    </dl>
-</div>
-{% endblock %}
+
+{% block title %}修改用户信息{% endblock %}
+
 
 {% block contentright %}
 <!--右侧主内容-->
@@ -29,7 +16,7 @@
         <div class="addresses">
             <div class="address-item" style="width:900px;height:500px;">
                 <div class="smt">
-                    <a href="{% url 'users:userinfo' %}" class="pull-right delete">查看用户信息</a>
+                    <a href="{% url 'users:userinfo' %}" class="pull-right delete">查看个人资料</a>
                 </div>
 
                 <div style="float:left;width:150px;">
