@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>显示所有订单</h3>
+{% for i in orders %}
+收货人：{{i.recv_name}}<br>
+收获电话：{{i.recv_tel}}<br>
+地址：{{i.recv_address}}<br>
+{{i.all_price}}<br>
+{{i.remark}}
+<hr>
+{% endfor %}
+</body>
+</html>

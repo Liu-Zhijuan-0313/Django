@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block title %}店铺详情{% endblock %}
+
+
+{% block contentright %}
+<!--右侧主内容-->
+<div class="yui3-u-5-6 body">
+    <div class="addressList">
+        <div class="mt">
+            <span class="fl"><strong>店铺详情</strong></span>
+        </div>
+    </div>
+
+    <div class="address-detail">
+        <div class="addresses">
+            <div class="address-item" style="width:900px;margin:0 auto;">
+                <div class="smt">
+                    <a href="{% url 'store:list' %}" class="pull-right delete">查看店铺详情</a><br>
+                     <a href="{% url 'store:update' store.id %}" class="pull-right delete">修改店铺信息</a>
+                </div>
+
+
+
+                <div style="width:750px;padding-left:10px;">
+
+                    <form action="" method="post" id="reg_form"
+                          class="sui-form form-horizontal" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <p style="color:red;padding-left:200px;">{{msg}}</p><br>
+                        <div class="control-group">
+                            <label for="inputrecv_name" class="control-label"></label>
+                            <div class="controls">
+                               <h1>欢迎来到<span style="color:red;">{{store.name}}</span>的小店</h1>
+                                <span class="error"></span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="cover" class="control-label"></label>
+                            <div class="controls">
+
+                               <img src="/{{store.cover}}" alt="" width="400">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                             <label class="control-label"></label>
+                            <div class="controls">店铺状态:
+                                   {% if store.status == 0 %}
+                                        正在营业
+                                        <a href="{% url 'store:change' store.id 1 %}">暂停营业</a>
+                                        <a href="{% url 'store:change' store.id 2 %}">删除店铺</a>
+                                    {% elif store.status == 1 %}
+                                        暂停营业
+                                        <a href="{% url 'store:change' store.id 0 %}">开始营业</a>
+                                        <a href="{% url 'store:change' store.id 2 %}">删除店铺</a>
+                                    {% elif store.status == 2 %}
+                                    店铺已被删除，请联系管理员
+                                    {% endif %}
+
+                                <span class="error"></span>
+                            </div>
+                        </div>
+                         <div class="control-group">
+                            <label for="cover" class="control-label"></label>
+                            <div class="controls">
+                                <a href="{% url 'goods:add' store.id %}">上架商品</a>
+
+                                <span class="error"></span>
+                            </div>
+                        </div>
+
+
+                        <br>
+
+
+                    </form>
+
+                    <div class="clearfix"></div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<hr>
+<script src="/static/tiny_mce/tiny_mce.js"></script>
+<script>
+    tinyMCE.init({
+           "mode":"textareas",
+           "theme":"advanced",
+           "width":500,
+           "height":300
+   }) 
+</script>
+{% endblock %}
+
+
+
+

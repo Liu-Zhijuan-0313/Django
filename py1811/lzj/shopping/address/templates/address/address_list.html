@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>地址列表</title>
+</head>
+<body>
+<h3>地址列表</h3>
+{% for i in address %}
+收货人{{i.id}}==={{i.recv_tel}}=={{i.province}}
+    {% if i.is_default %}
+    <span style="color:red">默认地址</span>
+    {% else %}
+    不是默认地址
+    {% endif %}<br>
+{% empty %}
+{% endfor %}
+</body>
+</html>

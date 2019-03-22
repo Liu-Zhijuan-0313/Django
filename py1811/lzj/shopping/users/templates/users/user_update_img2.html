@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}修改头像{% endblock %}
+
+{% block contentright %}
+<!--右侧主内容-->
+<div class="yui3-u-5-6 body">
+    <div class="addressList">
+        <div class="mt">
+            <span class="fl"><strong>修改头像</strong></span>
+        </div>
+    </div>
+
+    <div class="address-detail">
+
+        <div class="addresses">
+            <div class="address-item" style="width:900px;height:400px;">
+                <div class="smt">
+                    <a href="{% url 'users:userinfo' %}" class="pull-right delete">查看个人资料</a>
+                </div>
+
+                <div style="float:left;width:150px;">
+                    <div class="smc" style="float:left">
+                        <div class="item">
+                            <span class="fl label"></span>
+                            <div class="detail"><img src="/{{user.userinfo.header}}" alt=""
+                                                     style="width: 100px;height: 100px;border-radius: 50%;margin: 0 auto;">
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="float:left;width:750px;">
+
+                    <form action="{% url 'users:user_update_img' %}" method="post" id="reg_form"
+                          class="sui-form form-horizontal" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <p style="color:red;padding-left:200px;">{{msg}}</p><br>
+                        <div class="control-group">
+                            <label for="inputuserpass" class="control-label"></label>
+                            <div class="controls">
+                                <input type="file" id="inputuserpass" name="header" placeholder="请输入你的用户头像"
+                                       class="input-xfat input-xlarge">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="control-group">
+                            <label class="control-label"></label>
+                            <div class="controls btn-reg">
+                                <input type="submit" class="sui-btn btn-block btn-xlarge btn-danger reg-btn"
+                                       value="确定修改" style="width:100px;">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label"></label>
+                            <div class="controls btn-reg">
+                                <a href="{% url 'users:userinfo' %}" class="sui-btn btn-block btn-xlarge btn-info reg-btn" style="width:100px;">
+                                    取消
+                                </a>
+
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="clearfix"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

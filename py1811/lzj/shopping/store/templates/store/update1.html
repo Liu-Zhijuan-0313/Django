@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}修改店铺资料{% endblock %}
+
+
+{% block contentright %}
+<!--右侧主内容-->
+<div class="yui3-u-5-6 body">
+    <div class="addressList">
+        <div class="mt">
+            <span class="fl"><strong>修改店铺资料</strong></span>
+        </div>
+    </div>
+
+
+    <div class="address-detail">
+        <div class="addresses">
+            <div class="address-item" style="width:900px;margin:0 auto;">
+                <div class="smt">
+                    <a href="{% url 'store:list' %}" class="pull-right delete">查看店铺列表</a>
+
+                </div>
+
+                <div style="width:750px;padding-left:100px;">
+                    <form action="{% url 'store:update' store.id %}" method="post" id="reg_form"
+                          class="sui-form form-horizontal" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <p style="color:red;padding-left:200px;">{{msg}}</p><br>
+                        <div class="control-group">
+                            <label for="inputrecv_name" class="control-label">店铺名称:</label>
+                            <div class="controls">
+                                <input type="text" id="inputrecv_name" name="name" placeholder="请输入店铺名称"
+                                       class="input-xfat input-xlarge" value="{{store.name}}">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+                        <div style="float:left;padding-right:10px;">
+                            <label for="cover" class="control-label">店铺封面:</label>
+                            <div class="control-group">
+                                <div class="controls" style="padding-left:15px;">
+                                    <div class="detail" style="padding-left:25px"><img src="/{{store.cover}}" alt=""
+                                                                                       width="300"></div>
+                                    <div  style="padding-left:15px;padding-top:15px;">
+                                         <input  type="file" id="cover" name="cover"
+                                           class="input-xfat input-xlarge" >
+                                    </div>
+
+                                    <span class="error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <label class="control-label">店铺描述:</label>
+                        <div class="control-group">
+                            <div class="controls">
+                                <textarea name="intro" id="" cols="30" rows="10">{{store.intro}}</textarea>
+                                <span class="error"></span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label"></label>
+                            <div class="controls btn-reg">
+                                <input type="submit" class="sui-btn btn-block btn-xlarge btn-info reg-btn"
+                                       value="确定修改" style="width:100px;">
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <div class="clearfix"></div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="/static/tiny_mce/tiny_mce.js"></script>
+<script>
+    tinyMCE.init({
+           "mode":"textareas",
+           "theme":"simple",
+           "width":300,
+           "height":300
+   }) 
+
+
+</script>
+{% endblock %}

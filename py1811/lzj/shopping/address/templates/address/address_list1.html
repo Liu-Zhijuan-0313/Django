@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %}我的收货地址{% endblock %}
+
+<!--右侧主内容-->
+{% block contentright %}
+<!--右侧主内容-->
+<div class="yui3-u-5-6 body">
+    <div class="addressList">
+        <div class="mt">
+            <span class="fl"><strong>我的收货地址</strong></span>
+        </div>
+    </div>
+
+    <div class="address-detail">
+        <div class="addbtn">
+
+            <a href="{% url 'address:address_add' %}" class="sui-btn btn-bordered btn-xlarge btn-info">新增收货地址</a>
+            <span class="topnum">您已创建1个收货地址，最多可创建20个</span>
+        </div>
+
+
+        <hr>
+
+        <div class="addresses">
+            {% for i in address %}
+            <div class="address-item">
+
+                <div class="smt">&nbsp;
+                    {{i.user.username}}
+                    <a id="J_set" href="javascript:void(0)" data-toggle="tooltip" data-trigger="click" title=""
+                       data-original-title="更改收货人姓名&nbsp;&nbsp;<button class='sui-btn btn-small btn-danger'>保存</button><br><input type=&quot;text&quot;>">设置 </a>&nbsp;&nbsp;
+                    {% if i.is_default %}
+                    <i class="sui-btn btn-warning">默认地址</i>
+
+                    {% endif %}
+                    <a href="/address/{{i.id}}/address_delete/" class="pull-right delete">删除地址</a>
+
+                </div>
+                <div class="smc">
+                    <div class="item">
+                        <span class="fl label">收货人：</span>
+                        <div class="detail">{{i.recv_name}}</div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+                <div class="smc">
+                    <div class="item">
+                        <span class="fl label">所在地区：</span>
+                        <div class="detail">{{i.province}}{{i.city}}{{i.area}}{{i.street}}</div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+                <div class="smc">
+                    <div class="item">
+                        <span class="fl label">详细地址：</span>
+                        <div class="detail">{{i.desc}}</div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+                <div class="smc">
+                    <div class="item">
+                        <span class="fl label">手机：</span>
+                        <div class="detail">{{i.recv_tel}}</div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+                <div class="smc">
+                    <div class="item">
+                        <span class="fl label">固定电话：</span>
+                        <div class="detail">15897895641</div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="pull-right operate">
+                    <a href="/address/{{i.id}}/address_read/">查看详情</a>
+                    <a href="/address/{{i.id}}/address_update/">编辑</a>
+                </div>
+                <div class="clearfix"></div>
+
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}
