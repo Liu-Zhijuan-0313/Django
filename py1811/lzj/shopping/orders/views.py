@@ -34,7 +34,7 @@ def pay(request):
 def done(request):
     s_ids = request.POST.getlist("s_id")
     shopcarts = ShopCart.objects.filter(pk__in=s_ids)
-    address_id = request.POST.get("goods")
+    address_id = request.POST.get("address")
     address = Address.objects.get(pk=address_id)
     # goods = goods[0]
     # print(goods)
